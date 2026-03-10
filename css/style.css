@@ -34,7 +34,6 @@ html {
     background-position: center;
     z-index: 1;
     display: block;
-    transition: background-image 0.5s ease;
 }
 
 #menu-background-overlay.multiplayer-bg {
