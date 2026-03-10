@@ -225,23 +225,75 @@ playersSlider.addEventListener('input', (e) => {
 });
 
 // Step 3: Finish / Validation
+let waitTimerInterval = null;
+
 btnFinish.addEventListener('click', () => {
-    const waitTime = document.getElementById('server-wait-time').value.trim();
-    if (!waitTime) {
+    const waitTimeStr = document.getElementById('server-wait-time').value.trim().toLowerCase();
+    if (!waitTimeStr) {
         alert('Пожалуйста, введите время ожидания');
         return;
     }
 
-    // Simple parsing for feedback
-    console.log(`Создание сервера: Пароль(${passEnable.checked}), Игроков(${playersSlider.value}), Время(${waitTime})`);
-
-    // For now, just go back to servers (MOCK)
-    showScreen('multi-servers');
-
-    // Add toast feedback if available
-    if (typeof showToast === 'function') {
-        showToast('Сервер успешно создан! (Ожидание игроков)');
+    // Parse wait time (simple)
+    let seconds = 5; // Default
+    if (waitTimeStr.includes('мин')) {
+        seconds = parseInt(waitTimeStr) * 60;
+    } else {
+        seconds = parseInt(waitTimeStr);
     }
+
+    if (isNaN(seconds)) seconds = 5;
+    seconds = Math.max(5, Math.min(300, seconds)); // Limit 5s to 300s
+
+    showScreen('waiting-players');
+    startWaitTimer(seconds);
+});
+
+function startWaitTimer(duration) {
+    let timeLeft = duration;
+    const timerDisplay = document.getElementById('wait-timer-val');
+    const errorMsg = document.getElementById('server-error-msg');
+
+    // Clear any previous error
+    if (errorMsg) errorMsg.style.display = 'none';
+
+    const updateDisplay = () => {
+        const m = Math.floor(timeLeft / 60);
+        const s = timeLeft % 60;
+        timerDisplay.innerText = `${m}:${s < 10 ? '0' + s : s}`;
+    };
+
+    updateDisplay();
+
+    if (waitTimerInterval) clearInterval(waitTimerInterval);
+
+    waitTimerInterval = setInterval(() => {
+        timeLeft--;
+        updateDisplay();
+
+        if (timeLeft <= 0) {
+            clearInterval(waitTimerInterval);
+            validateAndStartGame();
+        }
+    }, 1000);
+}
+
+function validateAndStartGame() {
+    // MOCK: In a real game, we'd check actual connected players
+    // For now, we simulate failure as requested (only 1 player)
+    const playerCount = 1;
+
+    showScreen('multi-servers');
+    const errorMsg = document.getElementById('server-error-msg');
+    if (errorMsg) {
+        errorMsg.innerText = "В сервере недостаточно игроков или нечётное число игроков";
+        errorMsg.style.display = 'block';
+    }
+}
+
+document.getElementById('btn-cancel-waiting').addEventListener('click', () => {
+    if (waitTimerInterval) clearInterval(waitTimerInterval);
+    showScreen('multi-servers');
 });
 
 const sensSlider = document.getElementById('sens-slider');
