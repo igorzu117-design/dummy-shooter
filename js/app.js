@@ -31,6 +31,21 @@ function showScreen(screenId) {
 
             bgOverlay.style.display = (isInitial || isMulti) ? 'block' : 'none';
             bgOverlay.classList.toggle('multiplayer-bg', isMulti);
+
+            // --- TRAP: Background Integrity Check ---
+            if (isMulti) {
+                console.log("[TRAP] Entering Multiplayer. Applying background...");
+                bgOverlay.style.backgroundImage = "url('assets/multi-bg-trap-final.png?v=3.5')";
+
+                // Check if something else is covering it
+                const computed = window.getComputedStyle(bgOverlay);
+                console.log("[TRAP] Computed Background:", computed.backgroundImage);
+                if (!computed.backgroundImage.includes('multi-bg-trap-final')) {
+                    console.error("[TRAP] CONFLICT DETECTED! Background image overridden by other style.");
+                }
+            } else if (isInitial) {
+                bgOverlay.style.backgroundImage = "url('assets/menu-bg.png')";
+            }
         }
 
         if (gunMesh) gunMesh.visible = false; // Прячем руки в любом меню
