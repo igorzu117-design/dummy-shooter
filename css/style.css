@@ -34,7 +34,11 @@ html {
     background-position: center;
     z-index: 1;
     display: block;
-    /* По умолчанию виден в главном меню */
+    transition: background-image 0.5s ease;
+}
+
+#menu-background-overlay.multiplayer-bg {
+    background-image: url('../assets/multiplayer-bg.png');
 }
 
 /* UI Overlays */

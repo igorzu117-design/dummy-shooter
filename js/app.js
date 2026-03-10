@@ -26,7 +26,11 @@ function showScreen(screenId) {
 
         // Скрываем фон во всех экранах, кроме самых начальных
         if (bgOverlay) {
-            bgOverlay.style.display = (screenId === 'intro' || screenId === 'main' || screenId === 'play-options') ? 'block' : 'none';
+            const isInitial = (screenId === 'intro' || screenId === 'main' || screenId === 'play-options');
+            const isMulti = (screenId === 'multi-servers' || screenId === 'create-server' || screenId === 'waiting-players');
+
+            bgOverlay.style.display = (isInitial || isMulti) ? 'block' : 'none';
+            bgOverlay.classList.toggle('multiplayer-bg', isMulti);
         }
 
         if (gunMesh) gunMesh.visible = false; // Прячем руки в любом меню
