@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy Shooter</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Import maps for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- 3D Canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Background Overlay for Menu -->
+    <div id="menu-background-overlay"></div>
+
+    <!-- UI Overlay -->
+    <div id="ui-layer">
+
+        <!-- Intro Screen -->
+        <div id="screen-intro" class="screen full-screen active">
+            <h1 class="intro-title">Dummy Shooter</h1>
+            <p class="blink-text">Нажмите ЛКМ чтобы начать</p>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="screen-main" class="screen main-layout">
+            <div class="top-left-container">
+                <button id="btn-settings" class="btn-icon" title="Настройки">⚙️</button>
+            </div>
+            <h1 class="main-title">Dummy Shooter</h1>
+            <div class="bottom-right-container">
+                <button id="btn-play" class="btn-large">Играть</button>
+            </div>
+            <div class="bottom-left-container">
+            </div>
+        </div>
+
+        <!-- Play Options Menu -->
+        <div id="screen-play-options" class="screen">
+            <h2>Выбор режима</h2>
+            <button id="btn-play-bots">Игра с Ботами</button>
+            <button id="btn-play-multi" disabled title="Игра по сети пока что недоступна">Игра по Сети</button>
+            <button id="btn-tutorial-new">Обучение</button>
+            <button class="btn-back">Назад</button>
+        </div>
+
+        <!-- Team Selection Menu -->
+        <div id="screen-team" class="screen">
+            <h2>Выберите команду</h2>
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
+                <button id="btn-team-blue" style="background: rgba(59, 130, 246, 0.8); color: white;">Синие
+                    (Контр-террористы)</button>
+                <button id="btn-team-red" style="background: rgba(239, 68, 68, 0.8); color: white;">Красные
+                    (Террористы)</button>
+            </div>
+            <button class="btn-back" style="margin-top: 30px;">Назад</button>
+        </div>
+
+        <!-- Settings Menu -->
+        <div id="screen-settings" class="screen wide-screen">
+            <h2>Настройки</h2>
+            <div class="settings-tabs">
+                <button id="btn-tab-mouse" class="tab-btn active">Мышь</button>
+                <button id="btn-tab-keyboard" class="tab-btn">Клавиатура</button>
+                <button id="btn-tab-video" class="tab-btn">Видео</button>
+                <button id="btn-tab-help" class="tab-btn">Помощь</button>
+            </div>
+
+            <div class="settings-content active" id="settings-mouse">
+                <div class="slider-container">
+                    <label for="sens-slider">Чувствительность мыши: <span id="sens-val">1.0</span></label>
+                    <input type="range" id="sens-slider" min="0.1" max="3.0" step="0.1" value="1.0">
+                </div>
+                <div class="slider-container">
+                    <label for="aim-sens-slider">Чувствительность в прицеле: <span id="aim-sens-val">1.0</span></label>
+                    <input type="range" id="aim-sens-slider" min="0.1" max="3.0" step="0.1" value="1.0">
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="invert-wheel-checkbox">
+                    <label for="invert-wheel-checkbox">Инверсия колесика мыши (Выбор оружия)</label>
+                </div>
+            </div>
+
+            <div class="settings-content" id="settings-keyboard" style="display: none;">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="quiet-step-checkbox">
+                    <label for="quiet-step-checkbox">Тихий шаг (необязателен в бою с ботами)</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="show-fps-checkbox">
+                    <label for="show-fps-checkbox">Показать FPS</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="hide-ui-checkbox">
+                    <label for="hide-ui-checkbox">Скрыть Интерфейс (Клавиша U)</label>
+                </div>
+            </div>
+
+            <div class="settings-content" id="settings-video" style="display: none;">
+                <h3 style="color: var(--primary); margin-top: 0;">Ограничение кадров</h3>
+                <div class="checkbox-container">
+                    <input type="radio" name="fps-limit" id="fps-30" value="30">
+                    <label for="fps-30">30</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="radio" name="fps-limit" id="fps-60" value="60">
+                    <label for="fps-60">60</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="radio" name="fps-limit" id="fps-120" value="120">
+                    <label for="fps-120">120</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="radio" name="fps-limit" id="fps-144" value="144">
+                    <label for="fps-144">144</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="radio" name="fps-limit" id="fps-unlimited" value="0" checked>
+                    <label for="fps-unlimited">Без ограничений</label>
+                </div>
+            </div>
+
+            <div class="settings-content" id="settings-help" style="display: none;">
+                <p class="help-text">
+                    <b>WASD</b> - Перемещение<br>
+                    <b>Мышь</b> - Обзор<br>
+                    <b>Левый клик</b> - Стрельба<br>
+                    <b>Зажать Правый клик</b> - Прицел<br>
+                    <b>Пробел</b> - Прыжок<br>
+                    <b>ESC</b> - Меню / Пауза<br>
+                    <b>B</b> - Магазин<br>
+                    <b>1-5</b> - Выбор оружия
+                </p>
+            </div>
+
+            <button class="btn-back">Назад</button>
+        </div>
+
+        <!-- Pause Menu -->
+        <div id="screen-pause" class="screen">
+            <h1>Пауза</h1>
+            <button id="btn-resume">Продолжить</button>
+            <button id="btn-menu">В главное меню</button>
+        </div>
+
+        <!-- Game Over Menu (только кнопка в меню, без возрождения — оно в kill cam) -->
+        <div id="screen-gameover" class="screen">
+            <h1 style="color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);">Вы погибли!</h1>
+            <p id="gameover-score" style="font-size: 1.2rem; margin-bottom: 20px;">Счет матча: 0 - 0</p>
+            <button id="btn-menu-death">В главное меню</button>
+        </div>
+
+        <!-- Shop Menu -->
+        <div id="screen-shop" class="screen">
+            <h1>МАГАЗИН [B]</h1>
+            <div id="shop-balance" style="color: gold; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">
+                Баланс: 800 🪙</div>
+
+            <div class="shop-tabs">
+                <button id="btn-tab-weapons" class="tab-btn active">ОРУЖИЕ</button>
+                <button id="btn-tab-armor" class="tab-btn">БРОНЯ</button>
+                <button id="btn-tab-ammo" class="tab-btn">МАГАЗИНЫ</button>
+            </div>
+
+            <div id="shop-weapons" class="shop-list">
+                <button class="shop-item" data-type="weapon" data-id="pistol" data-price="200">
+                    <span class="item-name">Пистолет (Урон 20)</span>
+                    <span class="item-price">200 🪙</span>
+                </button>
+                <button class="shop-item" data-type="weapon" data-id="traumat" data-price="300">
+                    <span class="item-name">Травмат «Стражник» (Оглушение 2с)</span>
+                    <span class="item-price">300 🪙</span>
+                </button>
+                <button class="shop-item" data-type="weapon" data-id="auto" data-price="400">
+                    <span class="item-name">Автомат (Урон 15)</span>
+                    <span class="item-price">400 🪙</span>
+                </button>
+                <button class="shop-item" data-type="weapon" data-id="sniper" data-price="500">
+                    <span class="item-name">Снайперка (Урон 80)</span>
+                    <span class="item-price">500 🪙</span>
+                </button>
+                <button class="shop-item" data-type="scope" data-id="scope2x" data-price="0">
+                    <span class="item-name">Прицел 2x (Снайперка)</span>
+                    <span class="item-price">0 🪙</span>
+                </button>
+                <button class="shop-item" data-type="scope" data-id="scope3x" data-price="0">
+                    <span class="item-name">Прицел 3x (Снайперка)</span>
+                    <span class="item-price">0 🪙</span>
+                </button>
+                <button class="shop-item" data-type="scope" data-id="scope5x" data-price="0">
+                    <span class="item-name">Прицел 5x (Снайперка)</span>
+                    <span class="item-price">0 🪙</span>
+                </button>
+            </div>
+            <div id="shop-armor" class="shop-list" style="display: none;">
+                <button class="shop-item" data-type="armor" data-id="armor1" data-price="100">
+                    <span class="item-name">Броня Ур.1 (+10 Защиты)</span>
+                    <span class="item-price">100 🪙</span>
+                </button>
+                <button class="shop-item" data-type="armor" data-id="armor2" data-price="150">
+                    <span class="item-name">Броня Ур.2 (+15 Защиты)</span>
+                    <span class="item-price">150 🪙</span>
+                </button>
+                <button class="shop-item" data-type="armor" data-id="armor3" data-price="200">
+                    <span class="item-name">Броня Ур.3 (+20 Защиты)</span>
+                    <span class="item-price">200 🪙</span>
+                </button>
+                <button class="shop-item" data-type="armor" data-id="armor4" data-price="250">
+                    <span class="item-name">Броня Ур.4 (+30 Защиты)</span>
+                    <span class="item-price">250 🪙</span>
+                </button>
+                <button class="shop-item" data-type="armor" data-id="armor5" data-price="300">
+                    <span class="item-name">Броня Ур.5 (+50 Защиты)</span>
+                    <span class="item-price">300 🪙</span>
+                </button>
+            </div>
+            <div id="shop-ammo" class="shop-list" style="display: none;">
+                <button class="shop-item" data-type="ammo" data-id="pistol" data-price="200">
+                    <span class="item-name">Патроны (Пистолет, 50шт)</span>
+                    <span class="item-price">200 🪙</span>
+                </button>
+                <button class="shop-item" data-type="ammo" data-id="traumat" data-price="150">
+                    <span class="item-name">Патроны (Травмат, 10шт)</span>
+                    <span class="item-price">150 🪙</span>
+                </button>
+                <button class="shop-item" data-type="ammo" data-id="auto" data-price="200">
+                    <span class="item-name">Патроны (Автомат, 70шт)</span>
+                    <span class="item-price">200 🪙</span>
+                </button>
+                <button class="shop-item" data-type="ammo" data-id="sniper" data-price="300">
+                    <span class="item-name">Патроны (Снайперка, 30шт)</span>
+                    <span class="item-price">300 🪙</span>
+                </button>
+            </div>
+
+            <button id="btn-close-shop" style="margin-top: 20px;">Закрыть</button>
+        </div>
+
+    </div>
+
+    <div id="damage-flash"></div>
+
+    <!-- HUD -->
+    <div id="hud">
+        <div id="fps-display"
+            style="position: absolute; top: 20px; left: 20px; font-size: 1.5rem; font-weight: bold; color: #22c55e; text-shadow: 1px 1px 2px black; display: none;">
+            FPS: 0</div>
+        <div id="sniper-scope-overlay">
+            <div class="center-dot"></div>
+        </div>
+        <div id="crosshair"></div>
+        <div id="hit-marker">x</div>
+        <div id="score-display">Счёт: Синие 0 - 0 Красные</div>
+        <div id="flag-status"
+            style="position: absolute; top: 120px; width: 100%; text-align: center; font-size: 1.5rem; font-weight: bold; text-shadow: 0 0 5px black; display: none;">
+        </div>
+        <div id="invasion-alert"
+            style="position: absolute; top: 160px; width: 100%; text-align: center; font-size: 1.5rem; font-weight: bold; color: #f59e0b; text-shadow: 0 0 5px black; display: none;">
+            ВРАГИ НА ТЕРРИТОРИИ!</div>
+        <div id="flag-alert"
+            style="position: absolute; top: 200px; width: 100%; text-align: center; font-size: 1.5rem; font-weight: bold; color: #ef4444; text-shadow: 0 0 5px black; display: none;">
+            ВАШ ФЛАГ УКРАДЕН!</div>
+        <div id="coin-display">🪙 <span id="coin-text">800</span></div>
+        <div id="timer-display">Ожидание: 00:05</div>
+        <div id="shop-hint">Нажмите [B] для магазина</div>
+        <div id="ammo-display" style="display: none;">Пистолет <span id="ammo-text">50/0</span></div>
+
+        <!-- Inventory -->
+        <div id="inventory-hud">
+            <div class="inventory-slot active" data-index="1">
+                <span class="slot-key">1</span>
+                <span class="slot-name">Пистолет</span>
+            </div>
+            <div class="inventory-slot" data-index="2">
+                <span class="slot-key">2</span>
+                <span class="slot-name">Травмат</span>
+            </div>
+            <div class="inventory-slot" data-index="3">
+                <span class="slot-key">3</span>
+                <span class="slot-name">Автомат</span>
+            </div>
+            <div class="inventory-slot" data-index="4">
+                <span class="slot-key">4</span>
+                <span class="slot-name">Нож</span>
+            </div>
+            <div class="inventory-slot" data-index="5">
+                <span class="slot-key">5</span>
+                <span class="slot-name">Снайперка</span>
+            </div>
+        </div>
+
+        <div id="status-bars">
+            <div id="armor-wrapper" style="display: none;">
+                <div id="armor-icon">🛡️</div>
+                <div id="armor-bar-container">
+                    <div id="armor-bar"></div>
+                </div>
+                <div id="armor-text">0</div>
+            </div>
+            <div id="health-wrapper">
+                <div id="health-icon">❤</div>
+                <div id="health-bar-container">
+                    <div id="health-bar"></div>
+                </div>
+                <div id="health-text">100</div>
+            </div>
+        </div>
+
+        <div id="tutorial-box">
+            <div id="tutorial-text"></div>
+            <p class="skip-hint">Нажми Enter для пропуска</p>
+        </div>
+    </div>
+
+    <div id="fade-overlay"></div>
+
+    <!-- Kill Cam Overlay -->
+    <div id="killcam-overlay">
+        <div id="killcam-label">
+            <span id="killcam-title">☠ УБИТ МАНЕКЕНОМ</span>
+            <span id="killcam-subtitle">Наблюдение за убийцей</span>
+        </div>
+        <div id="killcam-bottom">
+            <button id="btn-respawn" disabled>Возродиться</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+
+</html>
