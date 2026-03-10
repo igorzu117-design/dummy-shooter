@@ -35,7 +35,7 @@ function showScreen(screenId) {
             // --- TRAP: Background Integrity Check ---
             if (isMulti) {
                 console.log("[TRAP] Entering Multiplayer. Applying background...");
-                bgOverlay.style.backgroundImage = "url('assets/multi-bg-trap-final.png?v=3.5')";
+                bgOverlay.style.backgroundImage = "url('assets/multi-bg-trap-final.jpg?v=4.0')";
 
                 // Check if something else is covering it
                 const computed = window.getComputedStyle(bgOverlay);
