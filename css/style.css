@@ -189,6 +189,95 @@ html {
     border-radius: 12px;
 }
 
+.btn-small {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.header-with-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-with-action h1 {
+    margin-bottom: 0;
+    font-size: 2rem;
+}
+
+/* Server List Table */
+.server-list-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#server-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#server-table th {
+    padding: 12px;
+    color: var(--primary);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+#server-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 1rem;
+}
+
+.empty-row td {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px !important;
+}
+
+/* Creation Steps */
+.create-step {
+    display: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.create-step.active {
+    display: block;
+}
+
+.create-step h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.create-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+input[type="password"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+}
+
 .btn-large:hover {
     transform: scale(1.05);
     box-shadow: 0 0 30px rgba(255, 140, 0, 0.8);

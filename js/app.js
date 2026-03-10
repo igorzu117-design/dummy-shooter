@@ -155,7 +155,93 @@ document.getElementById('btn-menu').addEventListener('click', returnToMenu);
 document.getElementById('btn-menu-death').addEventListener('click', returnToMenu);
 
 document.querySelectorAll('.btn-back').forEach(btn => {
-    btn.addEventListener('click', () => showScreen(currentScreen === 'pause' ? 'pause' : 'main'));
+    btn.addEventListener('click', () => {
+        if (currentScreen === 'multi-servers') {
+            showScreen('play-options');
+        } else {
+            showScreen(currentScreen === 'pause' ? 'pause' : 'main');
+        }
+    });
+});
+
+// --- MULTIPLAYER UI LOGIC ---
+document.getElementById('btn-play-multi').addEventListener('click', () => showScreen('multi-servers'));
+document.getElementById('btn-create-server-init').addEventListener('click', () => {
+    showScreen('create-server');
+    resetCreateSteps();
+});
+
+let currentCreateStep = 1;
+const createSteps = document.querySelectorAll('.create-step');
+const btnPrev = document.getElementById('btn-create-prev');
+const btnNext = document.getElementById('btn-create-next');
+const btnFinish = document.getElementById('btn-create-finish');
+
+function resetCreateSteps() {
+    currentCreateStep = 1;
+    updateCreateUI();
+}
+
+function updateCreateUI() {
+    createSteps.forEach((s, i) => {
+        s.classList.toggle('active', (i + 1) === currentCreateStep);
+    });
+
+    btnPrev.style.display = currentCreateStep > 1 ? 'block' : 'none';
+    btnNext.style.display = currentCreateStep < 3 ? 'block' : 'none';
+    btnFinish.style.display = currentCreateStep === 3 ? 'block' : 'none';
+}
+
+btnNext.addEventListener('click', () => {
+    if (currentCreateStep < 3) {
+        currentCreateStep++;
+        updateCreateUI();
+    }
+});
+
+btnPrev.addEventListener('click', () => {
+    if (currentCreateStep > 1) {
+        currentCreateStep--;
+        updateCreateUI();
+    }
+});
+
+document.querySelector('.btn-back-main').addEventListener('click', () => showScreen('multi-servers'));
+
+// Step 1: Password toggle
+const passEnable = document.getElementById('server-pass-enable');
+const passInput = document.getElementById('server-password');
+passEnable.addEventListener('change', (e) => {
+    passInput.style.display = e.target.checked ? 'block' : 'none';
+    if (e.target.checked) passInput.focus();
+});
+
+// Step 2: Slider formatting (two-digit)
+const playersSlider = document.getElementById('server-players-slider');
+const playersVal = document.getElementById('server-players-val');
+playersSlider.addEventListener('input', (e) => {
+    const val = parseInt(e.target.value);
+    playersVal.innerText = val < 10 ? '0' + val : val;
+});
+
+// Step 3: Finish / Validation
+btnFinish.addEventListener('click', () => {
+    const waitTime = document.getElementById('server-wait-time').value.trim();
+    if (!waitTime) {
+        alert('Пожалуйста, введите время ожидания');
+        return;
+    }
+
+    // Simple parsing for feedback
+    console.log(`Создание сервера: Пароль(${passEnable.checked}), Игроков(${playersSlider.value}), Время(${waitTime})`);
+
+    // For now, just go back to servers (MOCK)
+    showScreen('multi-servers');
+
+    // Add toast feedback if available
+    if (typeof showToast === 'function') {
+        showToast('Сервер успешно создан! (Ожидание игроков)');
+    }
 });
 
 const sensSlider = document.getElementById('sens-slider');

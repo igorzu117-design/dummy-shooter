@@ -52,9 +52,76 @@
         <div id="screen-play-options" class="screen">
             <h2>Выбор режима</h2>
             <button id="btn-play-bots">Игра с Ботами</button>
-            <button id="btn-play-multi" disabled title="Игра по сети пока что недоступна">Игра по Сети</button>
+            <button id="btn-play-multi">Игра по Сети</button>
             <button id="btn-tutorial-new">Обучение</button>
             <button class="btn-back">Назад</button>
+        </div>
+
+        <!-- Server Browser Screen -->
+        <div id="screen-multi-servers" class="screen wide-screen">
+            <div class="header-with-action">
+                <h1>Серверы</h1>
+                <button id="btn-create-server-init" class="btn-small">Создать свой сервер</button>
+            </div>
+            <div class="server-list-container">
+                <table id="server-table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Игроки</th>
+                            <th>Пинг</th>
+                            <th>Пароль</th>
+                        </tr>
+                    </thead>
+                    <tbody id="server-table-body">
+                        <!-- Серверы будут здесь -->
+                        <tr class="empty-row">
+                            <td colspan="4">Пока нет активных серверов...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn-back">Назад</button>
+        </div>
+
+        <!-- Create Server Screen -->
+        <div id="screen-create-server" class="screen wide-screen">
+            <h1>Создание сервера</h1>
+
+            <div id="create-step-1" class="create-step active">
+                <h3>Защита</h3>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="server-pass-enable">
+                    <label for="server-pass-enable">Установить пароль</label>
+                </div>
+                <input type="password" id="server-password" placeholder="Введите пароль"
+                    style="display: none; margin-top: 10px; width: 100%; padding: 10px; border-radius: 8px; border: none; background: rgba(0,0,0,0.3); color: white;">
+            </div>
+
+            <div id="create-step-2" class="create-step">
+                <h3>Количество игроков</h3>
+                <div class="slider-container">
+                    <label for="server-players-slider">Лимит игроков: <span id="server-players-val">02</span></label>
+                    <input type="range" id="server-players-slider" min="2" max="20" step="1" value="2">
+                </div>
+            </div>
+
+            <div id="create-step-3" class="create-step">
+                <h3>Время ожидания</h3>
+                <div class="input-group">
+                    <input type="text" id="server-wait-time" placeholder="Например: 5 сек. или 5 мин."
+                        style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; font-size: 1.1rem;">
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">От 5 секунд до 5 минут</p>
+                </div>
+            </div>
+
+            <div class="create-nav">
+                <button id="btn-create-prev" style="display: none;">Назад</button>
+                <button id="btn-create-next">Далее</button>
+                <button id="btn-create-finish" style="display: none; background-color: var(--primary);">Создать</button>
+            </div>
+            <button class="btn-back-main"
+                style="margin-top: 10px; background: transparent; border: none; color: #94a3b8; font-size: 0.9rem; text-decoration: underline;">Отмена</button>
         </div>
 
         <!-- Team Selection Menu -->
