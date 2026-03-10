@@ -63,6 +63,9 @@
                 <h1>Серверы</h1>
                 <button id="btn-create-server-init" class="btn-small">Создать свой сервер</button>
             </div>
+            <div id="server-error-msg"
+                style="display: none; color: #ef4444; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold;">
+            </div>
             <div class="server-list-container">
                 <table id="server-table">
                     <thead>
@@ -134,6 +137,23 @@
                     (Террористы)</button>
             </div>
             <button class="btn-back" style="margin-top: 30px;">Назад</button>
+        </div>
+
+        <!-- Waiting for Players Screen -->
+        <div id="screen-waiting-players" class="screen">
+            <h1 class="wait-title">Ожидание игроков...</h1>
+            <div class="wait-info">
+                <span id="wait-room-name">Комната #1</span>
+                <span id="wait-player-count">Игроков: 1 / 20</span>
+            </div>
+            <div class="wait-timer-container">
+                <div class="wait-timer-circle">
+                    <span id="wait-timer-val">00:05</span>
+                </div>
+            </div>
+            <p class="wait-hint">Игра начнется автоматически, когда наберется достаточное количество игроков.</p>
+            <button id="btn-cancel-waiting"
+                style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); margin-top: 20px;">Отмена</button>
         </div>
 
         <!-- Settings Menu -->
