@@ -34,10 +34,11 @@ html {
     background-position: center;
     z-index: 1;
     display: block;
+    transition: none !important;
 }
 
 #menu-background-overlay.multiplayer-bg {
-    background-image: url('../assets/multiplayer-bg.png');
+    background-image: url('../assets/multiplayer-bg.png') !important;
 }
 
 /* UI Overlays */
