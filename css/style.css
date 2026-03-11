@@ -967,39 +967,70 @@ p.help-text {
 
 /* Mobile UI Mode */
 body.mobile-ui-active #hud {
-    transform: scale(0.6);
-    transform-origin: top left;
+    transform: none;
 }
 
 body.mobile-ui-active #timer-display {
     left: 20%;
     transform: translateX(-50%);
+    top: 30px;
+    font-size: 0.85rem;
+    padding: 5px 12px;
+}
+
+body.mobile-ui-active #score-display {
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    top: 10px;
+    right: 10px;
+}
+
+body.mobile-ui-active #coin-display {
+    font-size: 0.7rem;
+}
+
+body.mobile-ui-active #shop-hint {
+    font-size: 0.65rem;
 }
 
 body.mobile-ui-active #status-bars {
-    bottom: -60px;
-    left: 20px;
+    bottom: 10px;
+    left: 10px;
+    transform: scale(0.65);
+    transform-origin: bottom left;
 }
 
 body.mobile-ui-active #ammo-display {
-    bottom: -60px;
-    left: 280px;
+    bottom: 15px;
+    left: 200px;
     right: auto;
+    font-size: 0.85rem;
+    padding: 5px 10px;
 }
 
 body.mobile-ui-active #inventory-hud {
-    right: 20px;
-    top: 150px;
+    right: 10px;
+    top: auto;
+    bottom: 55%;
     transform: none;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    width: 250px;
+    flex-direction: column;
+    gap: 3px;
 }
 
 body.mobile-ui-active .inventory-slot {
-    width: 100px;
-    height: 40px;
+    width: 85px;
+    height: 30px;
+    padding: 0 5px;
+}
+
+body.mobile-ui-active .slot-name {
+    font-size: 0.65rem;
+}
+
+body.mobile-ui-active .slot-key {
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
 }
 
 body.mobile-ui-active .screen {
