@@ -46,7 +46,9 @@
         <!-- Main Menu -->
         <div id="screen-main" class="screen main-layout">
             <div class="top-left-container">
-                <button id="btn-settings" class="btn-icon" title="Настройки">⚙️</button>
+                <button id="btn-settings" class="btn-icon" title="Настройки">⚙️
+                    <span id="mobile-alert-main" style="display: none; color: red; font-weight: bold; font-size: 1.2rem; position: absolute; top: -5px; right: -5px;">!</span>
+                </button>
             </div>
             <h1 class="main-title">Dummy Shooter</h1>
             <div class="bottom-right-container">
@@ -170,7 +172,9 @@
             <div class="settings-tabs">
                 <button id="btn-tab-mouse" class="tab-btn active">Мышь</button>
                 <button id="btn-tab-keyboard" class="tab-btn">Клавиатура</button>
-                <button id="btn-tab-video" class="tab-btn">Видео</button>
+                <button id="btn-tab-video" class="tab-btn">
+                    Видео <span id="mobile-alert-video" style="display: none; color: red; font-weight: bold; margin-left: 5px;">!</span>
+                </button>
                 <button id="btn-tab-help" class="tab-btn">Помощь</button>
             </div>
 
@@ -226,6 +230,13 @@
                     <input type="radio" name="fps-limit" id="fps-unlimited" value="0" checked>
                     <label for="fps-unlimited">Без ограничений</label>
                 </div>
+
+                <h3 style="color: var(--primary); margin-top: 20px;">Мобильный режим</h3>
+                <div class="checkbox-container" id="mobile-mode-container">
+                    <input type="checkbox" id="mobile-mode-checkbox">
+                    <label for="mobile-mode-checkbox">Включить мобильный интерфейс</label>
+                </div>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">Внимание! Этот режим изменяет игру, так что используйте его по назначению.</p>
             </div>
 
             <div class="settings-content" id="settings-help" style="display: none;">
@@ -347,6 +358,19 @@
     </div>
 
     <div id="damage-flash"></div>
+
+    <!-- Mobile Controls -->
+    <div id="mobile-controls" style="display: none; position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 1000;">
+        <div id="mobile-joystick-zone" style="position: absolute; bottom: 50px; left: 50px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.5); pointer-events: auto; touch-action: none;">
+            <div id="mobile-joystick-knob" style="position: absolute; top: 50%; left: 50%; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.8); transform: translate(-50%, -50%);"></div>
+        </div>
+        <button id="btn-mobile-jump" class="mobile-btn" style="position: absolute; bottom: 150px; right: 50px; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid rgba(255,255,255,0.5); color: white; font-weight: bold; font-size: 0.8rem; pointer-events: auto; touch-action: none;">ПРЫЖОК</button>
+        <button id="btn-mobile-shoot" class="mobile-btn" style="position: absolute; bottom: 50px; right: 130px; width: 80px; height: 80px; border-radius: 50%; background: rgba(239,68,68,0.5); border: 2px solid rgba(239,68,68,0.8); color: white; font-weight: bold; font-size: 1rem; pointer-events: auto; touch-action: none;">ОГОНЬ</button>
+        <button id="btn-mobile-aim" class="mobile-btn" style="position: absolute; bottom: 50px; right: 50px; width: 60px; height: 60px; border-radius: 50%; background: rgba(59,130,246,0.5); border: 2px solid rgba(59,130,246,0.8); color: white; font-weight: bold; font-size: 0.8rem; pointer-events: auto; touch-action: none;">ПРИЦЕЛ</button>
+        <button id="btn-mobile-shop" class="mobile-btn" style="position: absolute; top: 20px; right: 20px; width: 60px; height: 60px; border-radius: 10px; background: rgba(255,215,0,0.5); border: 2px solid rgba(255,215,0,0.8); color: white; font-weight: bold; font-size: 0.7rem; pointer-events: auto; touch-action: none;">МАГАЗИН</button>
+        <button id="btn-mobile-reload" class="mobile-btn" style="position: absolute; bottom: 150px; right: 130px; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid rgba(255,255,255,0.5); color: white; font-weight: bold; font-size: 0.8rem; pointer-events: auto; touch-action: none;">ПЕРЕЗАР</button>
+        <!-- Weapon slots will be styled in CSS under .mobile-ui-active -->
+    </div>
 
     <!-- HUD -->
     <div id="hud">

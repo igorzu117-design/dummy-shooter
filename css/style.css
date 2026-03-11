@@ -964,3 +964,19 @@ p.help-text {
 #btn-respawn.ready-blue:hover {
     transform: scale(1.06);
 }
+
+/* Mobile UI Mode */
+body.mobile-ui-active #hud {
+    transform: scale(0.7);
+    transform-origin: top left;
+}
+body.mobile-ui-active .screen {
+    transform: scale(0.85);
+    transform-origin: center center;
+}
+body.mobile-ui-active #mobile-controls {
+    display: block !important;
+}
+.mobile-btn:active {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
