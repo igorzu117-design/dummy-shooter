@@ -21,6 +21,7 @@ function showScreen(screenId) {
         s.style.display = ''; // Сбрасываем возможные inline-стили на всякий случай
     });
     if (screenId) {
+        document.body.classList.remove('in-game');
         document.getElementById('screen-' + screenId).classList.add('active');
         hud.style.display = 'none';
 
@@ -62,6 +63,7 @@ function showScreen(screenId) {
             document.getElementById('gameover-score').innerText = `Счет матча: ${ctfScore.blue} - ${ctfScore.red}`;
         }
     } else {
+        document.body.classList.add('in-game');
         hud.style.display = isHudHidden ? 'none' : 'block'; // В игре соблюдаем настройку скрытия
         if (gunMesh) gunMesh.visible = true; // Возвращаем руки в игре
         if (bgOverlay) bgOverlay.style.display = 'none'; // Скрываем фон в самой игре
