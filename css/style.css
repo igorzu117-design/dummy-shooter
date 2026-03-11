@@ -977,12 +977,12 @@ body.mobile-ui-active #timer-display {
 }
 
 body.mobile-ui-active #status-bars {
-    bottom: -30px;
+    bottom: -60px;
     left: 20px;
 }
 
 body.mobile-ui-active #ammo-display {
-    bottom: -30px;
+    bottom: -60px;
     left: 280px;
     right: auto;
 }

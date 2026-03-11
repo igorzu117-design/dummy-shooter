@@ -2809,33 +2809,77 @@ document.addEventListener('DOMContentLoaded', () => {
     // Camera Look Logic for Mobile (right half of screen swipe)
     let isDragging = false;
     let previousTouch = null;
+    let activeCameraTouchId = null;
+
     document.addEventListener('touchstart', (e) => {
         if (!document.body.classList.contains('mobile-ui-active')) return;
-        if (e.target.closest('.mobile-btn') || e.target.closest('#mobile-joystick-zone') || e.target.closest('.screen')) return;
-        isDragging = true;
-        previousTouch = e.touches[0];
+
+        // Find a touch on the right half that didn't hit a button
+        for (let i = 0; i < e.changedTouches.length; i++) {
+            const touch = e.changedTouches[i];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY);
+            // Ignore if it's a mobile button, joystick, or screen overlay
+            if (target && (target.closest('.mobile-btn') || target.closest('#mobile-joystick-zone') || target.closest('.screen'))) continue;
+
+            // Only allow aiming on the right half of the screen
+            if (touch.clientX > window.innerWidth / 2) {
+                if (!isDragging) {
+                    isDragging = true;
+                    activeCameraTouchId = touch.identifier;
+                    previousTouch = touch;
+                    break;
+                }
+            }
+        }
     }, { passive: false });
 
     document.addEventListener('touchmove', (e) => {
         if (!isDragging || !document.body.classList.contains('mobile-ui-active')) return;
-        const touch = e.touches[0];
-        const movementX = touch.clientX - previousTouch.clientX;
-        const movementY = touch.clientY - previousTouch.clientY;
 
-        if (camera) {
-            const euler = new THREE.Euler(0, 0, 0, 'YXZ');
-            euler.setFromQuaternion(camera.quaternion);
+        for (let i = 0; i < e.changedTouches.length; i++) {
+            const touch = e.changedTouches[i];
+            if (touch.identifier === activeCameraTouchId) {
+                const movementX = touch.clientX - previousTouch.clientX;
+                const movementY = touch.clientY - previousTouch.clientY;
 
-            const sens = sensSlider ? parseFloat(sensSlider.value) : 1.0;
-            euler.y -= movementX * 0.002 * sens;
-            euler.x -= movementY * 0.002 * sens;
-            euler.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, euler.x));
+                if (camera) {
+                    const euler = new THREE.Euler(0, 0, 0, 'YXZ');
+                    euler.setFromQuaternion(camera.quaternion);
 
-            camera.quaternion.setFromEuler(euler);
+                    const sens = sensSlider ? parseFloat(sensSlider.value) : 1.0;
+                    euler.y -= movementX * 0.002 * sens;
+                    euler.x -= movementY * 0.002 * sens;
+                    // Limit up/down viewing angle
+                    euler.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, euler.x));
+
+                    camera.quaternion.setFromEuler(euler);
+                }
+
+                previousTouch = touch;
+                break;
+            }
         }
-
-        previousTouch = touch;
     }, { passive: false });
 
-    document.addEventListener('touchend', () => { isDragging = false; previousTouch = null; }, { passive: false });
+    document.addEventListener('touchend', (e) => {
+        for (let i = 0; i < e.changedTouches.length; i++) {
+            if (e.changedTouches[i].identifier === activeCameraTouchId) {
+                isDragging = false;
+                previousTouch = null;
+                activeCameraTouchId = null;
+                break;
+            }
+        }
+    }, { passive: false });
+
+    document.addEventListener('touchcancel', (e) => {
+        for (let i = 0; i < e.changedTouches.length; i++) {
+            if (e.changedTouches[i].identifier === activeCameraTouchId) {
+                isDragging = false;
+                previousTouch = null;
+                activeCameraTouchId = null;
+                break;
+            }
+        }
+    }, { passive: false });
 });
