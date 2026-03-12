@@ -1674,10 +1674,10 @@ function resetGameVariables() {
     currentWeapon = 'pistol';
     ownedWeapons = ['pistol', 'knife'];
     weaponAmmoStash = {
-        'pistol': 0, 'traumat': 0, 'auto': 0, 'sniper': 0
+        'pistol': 0, 'traumat': 0, 'auto': 0, 'sniper': 0, 'shotgun': 0
     };
     weaponCurrentAmmo = {
-        'pistol': 50, 'traumat': 10, 'auto': 70, 'sniper': 10
+        'pistol': 50, 'traumat': 10, 'auto': 70, 'sniper': 10, 'shotgun': 4
     };
     createWeapon();
     sniperScope = 1;
@@ -1896,7 +1896,7 @@ function switchWeapon(index) {
 
 function updateInventoryUI() {
     const slots = document.querySelectorAll('.inventory-slot');
-    const weaponsOrder = ['pistol', 'traumat', 'auto', 'knife', 'sniper'];
+    const weaponsOrder = ['pistol', 'traumat', 'auto', 'knife', 'shotgun', 'sniper'];
 
     slots.forEach((slot, i) => {
         const wType = weaponsOrder[i];
