@@ -1002,7 +1002,8 @@ body.mobile-ui-active #status-bars {
 body.mobile-ui-active #ammo-display {
     position: absolute;
     bottom: calc(10px + env(safe-area-inset-bottom));
-    left: calc(160px + env(safe-area-inset-left));
+    left: calc(200px + env(safe-area-inset-left));
+    /* Increased separation from health bar */
     width: fit-content;
     white-space: nowrap;
     font-size: 0.65rem;
