@@ -9,8 +9,10 @@ body,
 html {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #000;
@@ -965,117 +967,162 @@ p.help-text {
     transform: scale(1.06);
 }
 
-/* Mobile UI Mode */
+/* Mobile UI Section - COMPREHENSIVE FIX */
 body.mobile-ui-active #hud {
     transform: none;
 }
 
 body.mobile-ui-active #timer-display {
-    left: 10%;
+    top: calc(10px + env(safe-area-inset-top));
+    left: 50%;
     transform: translateX(-50%);
-    top: 10px;
-    font-size: 0.7rem;
-    padding: 3px 8px;
+    font-size: 0.8rem;
+    padding: 5px 12px;
 }
 
 body.mobile-ui-active #score-display {
+    top: calc(10px + env(safe-area-inset-top));
+    right: calc(10px + env(safe-area-inset-right));
     font-size: 0.75rem;
-    padding: 4px 10px;
-    top: 8px;
-    right: 8px;
-}
-
-body.mobile-ui-active #coin-display {
-    font-size: 0.65rem;
-}
-
-body.mobile-ui-active #shop-hint {
-    font-size: 0.65rem;
+    padding: 5px 12px;
 }
 
 body.mobile-ui-active #status-bars {
-    bottom: 8px;
-    left: 8px;
-    transform: scale(0.5);
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: calc(10px + env(safe-area-inset-left));
+    transform: scale(0.6);
     transform-origin: bottom left;
 }
 
 body.mobile-ui-active #ammo-display {
-    bottom: 10px;
-    left: 140px;
-    right: auto;
-    font-size: 0.75rem;
-    padding: 3px 8px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: calc(160px + env(safe-area-inset-left));
+    font-size: 0.8rem;
+    padding: 5px 12px;
 }
 
 body.mobile-ui-active #inventory-hud {
-    right: 10px;
-    top: auto;
-    bottom: 55%;
-    transform: none;
-    flex-direction: column;
-    gap: 3px;
+    right: calc(10px + env(safe-area-inset-right));
+    bottom: calc(50% + 20px);
+    transform: translateY(50%);
+    gap: 4px;
 }
 
 body.mobile-ui-active .inventory-slot {
-    width: 85px;
-    height: 30px;
-    padding: 0 5px;
-}
-
-body.mobile-ui-active .slot-name {
-    font-size: 0.6rem;
-}
-
-body.mobile-ui-active .slot-key {
-    width: 14px;
-    height: 14px;
-    font-size: 0.5rem;
+    width: 90px;
+    height: 35px;
 }
 
 body.mobile-ui-active .screen {
-    transform: none;
-    /* Removed scale(0.65) to fix "ledges" */
-    width: 90%;
+    width: 85%;
     max-width: 320px;
     padding: 20px;
+    margin: auto;
 }
 
 body.mobile-ui-active .screen.wide-screen {
-    width: 95%;
-    max-width: 500px;
+    width: 92%;
+    max-width: 480px;
 }
 
-body.mobile-ui-active h1 {
-    font-size: 1.5rem;
-}
-
-body.mobile-ui-active .tab-btn {
-    padding: 5px 10px;
-    font-size: 0.8rem;
+/* Base Mobile Control Styles */
+#mobile-controls {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
 }
 
 body.mobile-ui-active.in-game #mobile-controls {
     display: block !important;
 }
 
-body.mobile-ui-active #mobile-controls .mobile-btn,
-body.mobile-ui-active #mobile-controls #mobile-joystick-zone {
-    transform: scale(0.65);
+#mobile-joystick-zone {
+    position: absolute;
+    bottom: calc(40px + env(safe-area-inset-bottom));
+    left: calc(40px + env(safe-area-inset-left));
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    pointer-events: auto;
+    touch-action: none;
 }
 
-body.mobile-ui-active #mobile-controls #mobile-joystick-zone {
-    transform-origin: bottom left;
+#mobile-joystick-knob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
 }
 
-body.mobile-ui-active #mobile-controls .mobile-btn {
-    transform-origin: bottom right;
-}
-
-body.mobile-ui-active #mobile-controls #btn-mobile-shop {
-    transform-origin: top right;
+.mobile-btn {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    touch-action: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
 }
 
 .mobile-btn:active {
-    background: rgba(255, 255, 255, 0.6) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+#btn-mobile-jump {
+    bottom: calc(140px + env(safe-area-inset-bottom));
+    right: calc(30px + env(safe-area-inset-right));
+    width: 60px;
+    height: 60px;
+}
+
+#btn-mobile-shoot {
+    bottom: calc(40px + env(safe-area-inset-bottom));
+    right: calc(110px + env(safe-area-inset-right));
+    width: 85px;
+    height: 85px;
+    background: rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.6);
+}
+
+#btn-mobile-aim {
+    bottom: calc(30px + env(safe-area-inset-bottom));
+    right: calc(30px + env(safe-area-inset-right));
+    width: 65px;
+    height: 65px;
+    background: rgba(59, 130, 246, 0.4);
+    border-color: rgba(59, 130, 246, 0.6);
+}
+
+#btn-mobile-reload {
+    bottom: calc(140px + env(safe-area-inset-bottom));
+    right: calc(110px + env(safe-area-inset-right));
+    width: 60px;
+    height: 60px;
+}
+
+#btn-mobile-shop {
+    top: calc(20px + env(safe-area-inset-top));
+    right: calc(20px + env(safe-area-inset-right));
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: rgba(255, 215, 0, 0.4);
+    border-color: rgba(255, 215, 0, 0.6);
 }
