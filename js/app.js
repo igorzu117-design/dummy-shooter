@@ -2828,6 +2828,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('touchstart', (e) => {
         if (!document.body.classList.contains('mobile-ui-active')) return;
 
+        // Prevent ghost scrolling/dragging
+        e.preventDefault();
+
         // Find a touch on the right half that didn't hit a button
         for (let i = 0; i < e.changedTouches.length; i++) {
             const touch = e.changedTouches[i];

@@ -14,9 +14,14 @@ html {
     height: 100dvh;
     /* Dynamic viewport height for mobile browsers */
     overflow: hidden;
+    touch-action: none;
+    /* Disable browser-level scrolling/zooming */
+    overscroll-behavior: none;
+    /* Prevent bounce effects */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #000;
     user-select: none;
+    -webkit-user-select: none;
 }
 
 #game-canvas {
@@ -1025,20 +1030,23 @@ body.mobile-ui-active .screen.wide-screen {
     max-width: 480px;
 }
 
-/* Base Mobile Control Styles */
-#mobile-controls {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1000;
+body.mobile-ui-active.in-game #mobile-controls {
+    display: flex !important;
+    /* Use flex for easier centering if needed, but absolute children remain absolute */
 }
 
-body.mobile-ui-active.in-game #mobile-controls {
-    display: block !important;
+#mobile-controls {
+    display: none;
+    position: fixed;
+    /* Use fixed to stay relative to screen, not body if body scrolls */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    pointer-events: none;
+    z-index: 9999;
+    /* ABOVE EVERYTHING */
 }
 
 #mobile-joystick-zone {
