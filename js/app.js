@@ -2828,19 +2828,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('touchstart', (e) => {
         if (!document.body.classList.contains('mobile-ui-active')) return;
 
-        // Prevent ghost scrolling/dragging
-        e.preventDefault();
-
         // Find a touch on the right half that didn't hit a button
         for (let i = 0; i < e.changedTouches.length; i++) {
             const touch = e.changedTouches[i];
             const target = document.elementFromPoint(touch.clientX, touch.clientY);
             // Ignore if it's a mobile button, joystick, or screen overlay
-            if (target && (target.closest('.mobile-btn') || target.closest('#mobile-joystick-zone') || target.closest('.screen'))) continue;
+            if (target && (target.closest('.mobile-btn') || target.closest('#mobile-joystick-zone') || target.closest('.screen') || target.closest('button') || target.closest('input'))) continue;
 
             // Only allow aiming on the right half of the screen
             if (touch.clientX > window.innerWidth / 2) {
                 if (!isDragging) {
+                    // Prevent ghost scrolling/dragging ONLY when we are sure this touch is for the camera
+                    e.preventDefault();
                     isDragging = true;
                     activeCameraTouchId = touch.identifier;
                     previousTouch = touch;
