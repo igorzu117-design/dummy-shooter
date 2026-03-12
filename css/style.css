@@ -1070,9 +1070,9 @@ body.mobile-ui-active .slot-name {
 }
 
 body.mobile-ui-active #inventory-hud {
-    top: calc(15% + env(safe-area-inset-top));
-    right: calc(80px + env(safe-area-inset-right));
-    transform: scale(0.85);
+    top: calc(5px + env(safe-area-inset-top));
+    right: calc(210px + env(safe-area-inset-right));
+    transform: scale(0.8);
     transform-origin: top right;
 }
 
@@ -1377,7 +1377,7 @@ body.mobile-ui-active.in-game #mobile-controls {
 }
 
 #btn-mobile-shop {
-    top: calc(15px + env(safe-area-inset-top));
+    top: calc(75px + env(safe-area-inset-top));
     right: calc(15px + env(safe-area-inset-right));
     width: 45px;
     height: 45px;
