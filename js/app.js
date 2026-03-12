@@ -2663,7 +2663,7 @@ function endRound() {
 }
 
 // --- MOBILE MODE LOGIC ---
-document.addEventListener('DOMContentLoaded', () => {
+const initMobileMode = () => {
     // Robust mobile detection: User Agent + Touch pointer support
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
         (window.matchMedia('(pointer: coarse)').matches);
