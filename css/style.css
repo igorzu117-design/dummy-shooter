@@ -978,18 +978,18 @@ body.mobile-ui-active #hud {
 }
 
 body.mobile-ui-active #timer-display {
-    top: calc(10px + env(safe-area-inset-top));
+    top: calc(5px + env(safe-area-inset-top));
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.8rem;
-    padding: 5px 12px;
+    font-size: 0.65rem;
+    padding: 2px 8px;
 }
 
 body.mobile-ui-active #score-display {
-    top: calc(10px + env(safe-area-inset-top));
-    right: calc(10px + env(safe-area-inset-right));
-    font-size: 0.75rem;
-    padding: 5px 12px;
+    top: calc(5px + env(safe-area-inset-top));
+    right: calc(5px + env(safe-area-inset-right));
+    font-size: 0.6rem;
+    padding: 2px 8px;
 }
 
 body.mobile-ui-active #status-bars {
@@ -1006,28 +1006,83 @@ body.mobile-ui-active #ammo-display {
     padding: 5px 12px;
 }
 
-body.mobile-ui-active #inventory-hud {
-    right: calc(10px + env(safe-area-inset-right));
-    bottom: calc(50% + 20px);
-    transform: translateY(50%);
-    gap: 4px;
+body.mobile-ui-active .intro-title {
+    font-size: 3rem;
+}
+
+body.mobile-ui-active .blink-text {
+    font-size: 1rem;
+    bottom: 20%;
+}
+
+body.mobile-ui-active .main-title {
+    font-size: 2.2rem;
+    margin-top: 20px;
+}
+
+body.mobile-ui-active .top-left-container {
+    top: calc(15px + env(safe-area-inset-top));
+    left: calc(15px + env(safe-area-inset-left));
+}
+
+body.mobile-ui-active .bottom-right-container {
+    bottom: calc(15px + env(safe-area-inset-bottom));
+    right: calc(15px + env(safe-area-inset-right));
+}
+
+body.mobile-ui-active .btn-icon {
+    font-size: 1.2rem;
+    width: 45px;
+    height: 45px;
+}
+
+body.mobile-ui-active .btn-large {
+    font-size: 1.1rem;
+    padding: 10px 30px;
 }
 
 body.mobile-ui-active .inventory-slot {
-    width: 90px;
-    height: 35px;
+    width: 80px;
+    height: 30px;
+}
+
+body.mobile-ui-active .slot-name {
+    font-size: 0.55rem;
 }
 
 body.mobile-ui-active .screen {
-    width: 85%;
-    max-width: 320px;
-    padding: 20px;
+    width: 80%;
+    max-width: 280px;
+    padding: 15px;
     margin: auto;
+    gap: 8px;
 }
 
 body.mobile-ui-active .screen.wide-screen {
-    width: 92%;
-    max-width: 480px;
+    width: 90%;
+    max-width: 440px;
+}
+
+body.mobile-ui-active h2 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+body.mobile-ui-active .slider-container {
+    margin-bottom: 5px;
+}
+
+body.mobile-ui-active .slider-container label {
+    font-size: 0.65rem;
+}
+
+body.mobile-ui-active .checkbox-container label {
+    font-size: 0.65rem;
+}
+
+body.mobile-ui-active .tab-btn {
+    padding: 4px 8px;
+    font-size: 0.65rem;
 }
 
 body.mobile-ui-active.in-game #mobile-controls {
@@ -1051,10 +1106,10 @@ body.mobile-ui-active.in-game #mobile-controls {
 
 #mobile-joystick-zone {
     position: absolute;
-    bottom: calc(40px + env(safe-area-inset-bottom));
-    left: calc(40px + env(safe-area-inset-left));
-    width: 120px;
-    height: 120px;
+    bottom: calc(25px + env(safe-area-inset-bottom));
+    left: calc(25px + env(safe-area-inset-left));
+    width: 100px;
+    height: 100px;
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
@@ -1066,8 +1121,8 @@ body.mobile-ui-active.in-game #mobile-controls {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -1094,43 +1149,45 @@ body.mobile-ui-active.in-game #mobile-controls {
 }
 
 #btn-mobile-jump {
-    bottom: calc(140px + env(safe-area-inset-bottom));
-    right: calc(30px + env(safe-area-inset-right));
-    width: 60px;
-    height: 60px;
+    bottom: calc(115px + env(safe-area-inset-bottom));
+    right: calc(25px + env(safe-area-inset-right));
+    width: 45px;
+    height: 45px;
 }
 
 #btn-mobile-shoot {
-    bottom: calc(40px + env(safe-area-inset-bottom));
-    right: calc(110px + env(safe-area-inset-right));
-    width: 85px;
-    height: 85px;
+    bottom: calc(30px + env(safe-area-inset-bottom));
+    right: calc(85px + env(safe-area-inset-right));
+    width: 65px;
+    height: 65px;
     background: rgba(239, 68, 68, 0.4);
     border-color: rgba(239, 68, 68, 0.6);
 }
 
 #btn-mobile-aim {
-    bottom: calc(30px + env(safe-area-inset-bottom));
-    right: calc(30px + env(safe-area-inset-right));
-    width: 65px;
-    height: 65px;
+    bottom: calc(25px + env(safe-area-inset-bottom));
+    right: calc(25px + env(safe-area-inset-right));
+    width: 50px;
+    height: 50px;
     background: rgba(59, 130, 246, 0.4);
     border-color: rgba(59, 130, 246, 0.6);
 }
 
 #btn-mobile-reload {
-    bottom: calc(140px + env(safe-area-inset-bottom));
-    right: calc(110px + env(safe-area-inset-right));
-    width: 60px;
-    height: 60px;
+    bottom: calc(115px + env(safe-area-inset-bottom));
+    right: calc(85px + env(safe-area-inset-right));
+    bottom: calc(90px + env(safe-area-inset-bottom));
+    right: calc(70px + env(safe-area-inset-right));
+    width: 35px;
+    height: 35px;
 }
 
 #btn-mobile-shop {
-    top: calc(20px + env(safe-area-inset-top));
-    right: calc(20px + env(safe-area-inset-right));
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
+    top: calc(15px + env(safe-area-inset-top));
+    right: calc(15px + env(safe-area-inset-right));
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
     background: rgba(255, 215, 0, 0.4);
     border-color: rgba(255, 215, 0, 0.6);
 }
