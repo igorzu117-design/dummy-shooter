@@ -2733,6 +2733,12 @@ const initMobileMode = () => {
             mobileCheckbox.checked = true;
         }
         updateMobileUI(true);
+
+        // Update intro text for mobile
+        const introText = document.querySelector('#screen-intro .blink-text');
+        if (introText) {
+            introText.innerText = 'Нажмите на экран чтобы начать';
+        }
     }
 
     // Touch controls

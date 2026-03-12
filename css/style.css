@@ -1028,6 +1028,8 @@ body.mobile-ui-active #shop-hint {
 
 body.mobile-ui-active .intro-title {
     font-size: 3rem;
+    margin-top: -80px;
+    /* Move title up on mobile */
 }
 
 body.mobile-ui-active .blink-text {
