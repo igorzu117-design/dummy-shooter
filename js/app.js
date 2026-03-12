@@ -417,7 +417,7 @@ let weaponStats = {
     'traumat': { damage: 10, speed: 60, rate: 5000, price: 300, isStun: true, maxAmmo: 10 },
     'auto': { damage: 15, speed: 120, rate: 100, price: 400, maxAmmo: 70 },
     'sniper': { damage: 80, headDamage: 100, speed: 200, rate: 1000, price: 500, maxAmmo: 10 },
-    'shotgun': { damage: 25, pellets: 4, speed: 100, rate: 800, price: 600, maxAmmo: 8 },
+    'shotgun': { damage: 25, pellets: 4, speed: 100, rate: 800, price: 600, maxAmmo: 4 },
     'knife': { damage: 70, rate: 500, range: 2.5, isMelee: true }
 };
 
@@ -426,7 +426,7 @@ let weaponAmmoStash = { // Патроны в запасе
     'pistol': 0, 'traumat': 0, 'auto': 0, 'sniper': 0, 'shotgun': 0
 };
 let weaponCurrentAmmo = { // Текущие патроны в магазине
-    'pistol': 50, 'traumat': 10, 'auto': 70, 'sniper': 10, 'shotgun': 8
+    'pistol': 50, 'traumat': 10, 'auto': 70, 'sniper': 10, 'shotgun': 4
 };
 let playerStunnedUntil = 0;
 let isMouseButtonDown = false;
@@ -583,6 +583,7 @@ function updateAmmoUI() {
         'pistol': 'Пистолет',
         'traumat': 'Травмат',
         'auto': 'Автомат',
+        'shotgun': 'Дробовик',
         'sniper': 'Снайперка'
     };
 
@@ -1863,9 +1864,9 @@ function onKeyDown(event) {
             break;
         case 'Digit1': switchWeapon(0); break;
         case 'Digit2': switchWeapon(1); break;
-        case 'Digit3': switchWeapon(2); break;
         case 'Digit4': switchWeapon(3); break;
         case 'Digit5': switchWeapon(4); break;
+        case 'Digit6': switchWeapon(5); break;
         case 'KeyR': reloadWeapon(); break;
         case 'AltLeft':
         case 'AltRight':
@@ -1879,7 +1880,7 @@ function onKeyDown(event) {
 }
 
 function switchWeapon(index) {
-    const weaponsOrder = ['pistol', 'traumat', 'auto', 'shotgun', 'sniper', 'knife'];
+    const weaponsOrder = ['pistol', 'traumat', 'auto', 'knife', 'shotgun', 'sniper'];
     const targetWeapon = weaponsOrder[index];
 
     if (ownedWeapons.includes(targetWeapon)) {
