@@ -1001,9 +1001,22 @@ body.mobile-ui-active #status-bars {
 
 body.mobile-ui-active #ammo-display {
     bottom: calc(10px + env(safe-area-inset-bottom));
-    left: calc(160px + env(safe-area-inset-left));
+    left: calc(120px + env(safe-area-inset-left));
+    font-size: 0.65rem;
+    padding: 3px 10px;
+}
+
+body.mobile-ui-active #coin-display {
+    bottom: calc(45px + env(safe-area-inset-bottom));
+    left: calc(10px + env(safe-area-inset-left));
     font-size: 0.8rem;
-    padding: 5px 12px;
+}
+
+body.mobile-ui-active #shop-hint {
+    bottom: calc(70px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
 }
 
 body.mobile-ui-active .intro-title {
@@ -1176,10 +1189,8 @@ body.mobile-ui-active.in-game #mobile-controls {
 #btn-mobile-reload {
     bottom: calc(115px + env(safe-area-inset-bottom));
     right: calc(85px + env(safe-area-inset-right));
-    bottom: calc(90px + env(safe-area-inset-bottom));
-    right: calc(70px + env(safe-area-inset-right));
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
 }
 
 #btn-mobile-shop {
