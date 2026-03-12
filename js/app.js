@@ -2898,4 +2898,11 @@ const initMobileMode = () => {
             }
         }
     }, { passive: false });
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMode);
+} else {
+    initMobileMode();
+}
+
