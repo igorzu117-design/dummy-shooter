@@ -1034,8 +1034,25 @@ body.mobile-ui-active .slot-key {
 }
 
 body.mobile-ui-active .screen {
-    transform: scale(0.65);
-    transform-origin: center center;
+    transform: none;
+    /* Removed scale(0.65) to fix "ledges" */
+    width: 90%;
+    max-width: 320px;
+    padding: 20px;
+}
+
+body.mobile-ui-active .screen.wide-screen {
+    width: 95%;
+    max-width: 500px;
+}
+
+body.mobile-ui-active h1 {
+    font-size: 1.5rem;
+}
+
+body.mobile-ui-active .tab-btn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
 }
 
 body.mobile-ui-active.in-game #mobile-controls {
