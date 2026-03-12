@@ -1000,11 +1000,16 @@ body.mobile-ui-active #status-bars {
 }
 
 body.mobile-ui-active #ammo-display {
+    position: absolute;
     bottom: calc(10px + env(safe-area-inset-bottom));
-    left: calc(150px + env(safe-area-inset-left));
-    /* Moved further from left (was 120px) */
+    left: calc(160px + env(safe-area-inset-left));
+    width: fit-content;
+    white-space: nowrap;
     font-size: 0.65rem;
     padding: 3px 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
 }
 
 body.mobile-ui-active #coin-display {
@@ -1064,6 +1069,13 @@ body.mobile-ui-active .slot-name {
     font-size: 0.55rem;
 }
 
+body.mobile-ui-active #inventory-hud {
+    top: calc(15% + env(safe-area-inset-top));
+    right: calc(80px + env(safe-area-inset-right));
+    transform: scale(0.85);
+    transform-origin: top right;
+}
+
 body.mobile-ui-active .screen {
     width: 70%;
     max-width: 200px;
@@ -1078,6 +1090,8 @@ body.mobile-ui-active .screen.wide-screen {
     width: 85%;
     max-width: 360px;
     /* Further shrunk shop/settings from 400px */
+    transform: translateY(15px);
+    /* Move down to clear top HUD */
 }
 
 body.mobile-ui-active h2 {
