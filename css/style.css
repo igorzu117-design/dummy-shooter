@@ -1001,7 +1001,8 @@ body.mobile-ui-active #status-bars {
 
 body.mobile-ui-active #ammo-display {
     bottom: calc(10px + env(safe-area-inset-bottom));
-    left: calc(120px + env(safe-area-inset-left));
+    left: calc(150px + env(safe-area-inset-left));
+    /* Moved further from left (was 120px) */
     font-size: 0.65rem;
     padding: 3px 10px;
 }
@@ -1065,7 +1066,8 @@ body.mobile-ui-active .slot-name {
 
 body.mobile-ui-active .screen {
     width: 70%;
-    max-width: 240px;
+    max-width: 200px;
+    /* Further shrunk settings/menu screens from 240px */
     padding: 10px;
     margin: auto;
     gap: 5px;
@@ -1074,7 +1076,8 @@ body.mobile-ui-active .screen {
 
 body.mobile-ui-active .screen.wide-screen {
     width: 85%;
-    max-width: 400px;
+    max-width: 360px;
+    /* Further shrunk shop/settings from 400px */
 }
 
 body.mobile-ui-active h2 {
