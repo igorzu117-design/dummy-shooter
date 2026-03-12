@@ -511,7 +511,7 @@ function init() {
         controls.pointerSpeed = parseFloat(sensSlider.value);
         document.getElementById('crosshair').style.transform = 'translate(-50%, -50%) scale(1)';
 
-        if (currentScreen !== 'intro' && currentScreen !== 'main' && currentScreen !== 'play-options' && currentScreen !== 'gameover' && currentScreen !== 'shop' && playerHealth > 0) {
+        if (currentScreen !== 'intro' && currentScreen !== 'main' && currentScreen !== 'play-options' && currentScreen !== 'gameover' && currentScreen !== 'shop' && currentScreen !== 'team' && playerHealth > 0) {
             showScreen('pause');
         }
     });
