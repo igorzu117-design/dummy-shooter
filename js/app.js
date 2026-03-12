@@ -417,15 +417,16 @@ let weaponStats = {
     'traumat': { damage: 10, speed: 60, rate: 5000, price: 300, isStun: true, maxAmmo: 10 },
     'auto': { damage: 15, speed: 120, rate: 100, price: 400, maxAmmo: 70 },
     'sniper': { damage: 80, headDamage: 100, speed: 200, rate: 1000, price: 500, maxAmmo: 10 },
+    'shotgun': { damage: 25, pellets: 4, speed: 100, rate: 800, price: 600, maxAmmo: 8 },
     'knife': { damage: 70, rate: 500, range: 2.5, isMelee: true }
 };
 
 let ownedWeapons = ['pistol', 'knife'];
 let weaponAmmoStash = { // Патроны в запасе
-    'pistol': 0, 'traumat': 0, 'auto': 0, 'sniper': 0
+    'pistol': 0, 'traumat': 0, 'auto': 0, 'sniper': 0, 'shotgun': 0
 };
 let weaponCurrentAmmo = { // Текущие патроны в магазине
-    'pistol': 50, 'traumat': 10, 'auto': 70, 'sniper': 10
+    'pistol': 50, 'traumat': 10, 'auto': 70, 'sniper': 10, 'shotgun': 8
 };
 let playerStunnedUntil = 0;
 let isMouseButtonDown = false;
@@ -665,6 +666,7 @@ function setupShop() {
                     if (id === 'traumat') amount = 10;
                     if (id === 'auto') amount = 70;
                     if (id === 'sniper') amount = 30;
+                    if (id === 'shotgun') amount = 30;
 
                     coins -= price;
                     weaponAmmoStash[id] += amount;
@@ -2014,7 +2016,21 @@ function shoot() {
         }
 
         const startPos = camera.position.clone().addScaledVector(dir, 0.5);
-        spawnBullet(startPos, dir, playerTeam, { isPlayer: true, stats: stats });
+
+        if (stats.pellets) {
+            for (let i = 0; i < stats.pellets; i++) {
+                // Добавляем разброс для дробовика
+                const spread = 0.05;
+                const spreadDir = dir.clone().add(new THREE.Vector3(
+                    (Math.random() - 0.5) * spread,
+                    (Math.random() - 0.5) * spread,
+                    (Math.random() - 0.5) * spread
+                )).normalize();
+                spawnBullet(startPos, spreadDir, playerTeam, { isPlayer: true, stats: stats });
+            }
+        } else {
+            spawnBullet(startPos, dir, playerTeam, { isPlayer: true, stats: stats });
+        }
     }
 
     setTimeout(() => { isShooting = false; }, 50);
