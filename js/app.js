@@ -861,6 +861,43 @@ function createAutoModel() {
     return group;
 }
 
+function createShotgunModel() {
+    const group = new THREE.Group();
+    const matMetal = new THREE.MeshStandardMaterial({ color: 0x333333, roughness: 0.5, metalness: 0.7 });
+    const matWood = new THREE.MeshStandardMaterial({ color: 0x5d4037, roughness: 0.8 });
+
+    // Barrel
+    const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.6, 12), matMetal);
+    barrel.rotateX(Math.PI / 2); barrel.position.z = -0.25;
+    group.add(barrel);
+
+    // Magazine Tube (under barrel)
+    const magTube = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.4, 12), matMetal);
+    magTube.rotateX(Math.PI / 2); magTube.position.z = -0.15; magTube.position.y = -0.035;
+    group.add(magTube);
+
+    // Receiver
+    const receiver = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.08, 0.2), matMetal);
+    receiver.position.z = 0.1;
+    group.add(receiver);
+
+    // Pump (Forend)
+    const pump = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.2, 12), matWood);
+    pump.rotateX(Math.PI / 2); pump.position.z = -0.15; pump.position.y = -0.035;
+    group.add(pump);
+
+    // Stock
+    const stock = new THREE.Group();
+    const stockMain = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.1, 0.25), matWood);
+    stockMain.position.set(0, -0.05, 0.3); stockMain.rotation.x = 0.2;
+    stock.add(stockMain);
+    group.add(stock);
+
+    return group;
+}
+return group;
+}
+
 function createSniperModel() {
     const group = new THREE.Group();
     const matMetal = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4, metalness: 0.8 });
@@ -1020,6 +1057,8 @@ function createWeapon() {
         model = createAutoModel();
     } else if (currentWeapon === 'sniper') {
         model = createSniperModel();
+    } else if (currentWeapon === 'shotgun') {
+        model = createShotgunModel();
     } else if (currentWeapon === 'knife') {
         model = createKnifeModel();
     } else {
@@ -1842,7 +1881,7 @@ function onKeyDown(event) {
 }
 
 function switchWeapon(index) {
-    const weaponsOrder = ['pistol', 'traumat', 'auto', 'knife', 'sniper'];
+    const weaponsOrder = ['pistol', 'traumat', 'auto', 'shotgun', 'sniper', 'knife'];
     const targetWeapon = weaponsOrder[index];
 
     if (ownedWeapons.includes(targetWeapon)) {
