@@ -2664,36 +2664,50 @@ function endRound() {
 
 // --- MOBILE MODE LOGIC ---
 document.addEventListener('DOMContentLoaded', () => {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Robust mobile detection: User Agent + Touch pointer support
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        (window.matchMedia('(pointer: coarse)').matches);
 
     const settingsAlert = document.getElementById('mobile-alert-main');
     const videoAlert = document.getElementById('mobile-alert-video');
     const btnTabVideo = document.getElementById('btn-tab-video');
     const mobileCheckbox = document.getElementById('mobile-mode-checkbox');
 
-    if (isMobile) {
-        if (settingsAlert) settingsAlert.style.display = 'block';
-        if (videoAlert) videoAlert.style.display = 'inline';
-        if (btnTabVideo) {
-            btnTabVideo.style.color = 'red';
-            btnTabVideo.style.textShadow = '0 0 5px red';
+    function updateMobileUI(active) {
+        if (active) {
+            document.body.classList.add('mobile-ui-active');
+            if (settingsAlert) settingsAlert.style.display = 'none';
+            if (videoAlert) videoAlert.style.display = 'none';
+            if (btnTabVideo) {
+                btnTabVideo.style.color = '';
+                btnTabVideo.style.textShadow = '';
+            }
+        } else {
+            document.body.classList.remove('mobile-ui-active');
+            // If it's actually a mobile device but user turned off UI, show alerts as a hint
+            if (isMobile) {
+                if (settingsAlert) settingsAlert.style.display = 'block';
+                if (videoAlert) videoAlert.style.display = 'inline';
+                if (btnTabVideo) {
+                    btnTabVideo.style.color = 'red';
+                    btnTabVideo.style.textShadow = '0 0 5px red';
+                }
+            }
         }
     }
 
     if (mobileCheckbox) {
         mobileCheckbox.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.body.classList.add('mobile-ui-active');
-                if (settingsAlert) settingsAlert.style.display = 'none';
-                if (videoAlert) videoAlert.style.display = 'none';
-                if (btnTabVideo) {
-                    btnTabVideo.style.color = '';
-                    btnTabVideo.style.textShadow = '';
-                }
-            } else {
-                document.body.classList.remove('mobile-ui-active');
-            }
+            updateMobileUI(e.target.checked);
         });
+    }
+
+    // AUTO-DETECTION: Enable if mobile detected
+    if (isMobile) {
+        if (mobileCheckbox) {
+            mobileCheckbox.checked = true;
+        }
+        updateMobileUI(true);
     }
 
     // Touch controls
