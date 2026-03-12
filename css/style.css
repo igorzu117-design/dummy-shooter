@@ -1050,8 +1050,8 @@ body.mobile-ui-active .btn-icon {
 }
 
 body.mobile-ui-active .btn-large {
-    font-size: 1.1rem;
-    padding: 10px 30px;
+    font-size: 0.9rem;
+    padding: 8px 20px;
 }
 
 body.mobile-ui-active .inventory-slot {
@@ -1064,20 +1064,21 @@ body.mobile-ui-active .slot-name {
 }
 
 body.mobile-ui-active .screen {
-    width: 80%;
-    max-width: 280px;
-    padding: 15px;
+    width: 70%;
+    max-width: 240px;
+    padding: 10px;
     margin: auto;
-    gap: 8px;
+    gap: 5px;
+    border-radius: 12px;
 }
 
 body.mobile-ui-active .screen.wide-screen {
-    width: 90%;
-    max-width: 440px;
+    width: 85%;
+    max-width: 400px;
 }
 
 body.mobile-ui-active h2 {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     margin: 0;
 }
 
@@ -1086,11 +1087,26 @@ body.mobile-ui-active .slider-container {
 }
 
 body.mobile-ui-active .slider-container label {
-    font-size: 0.65rem;
+    font-size: 0.5rem;
 }
 
 body.mobile-ui-active .checkbox-container label {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
+}
+
+body.mobile-ui-active .tab-btn {
+    font-size: 0.7rem !important;
+    padding: 5px 10px !important;
+}
+
+body.mobile-ui-active .btn-back {
+    font-size: 0.7rem !important;
+    padding: 5px 15px !important;
+}
+
+body.mobile-ui-active .shop-close-btn {
+    font-size: 0.7rem !important;
+    padding: 5px 20px !important;
 }
 
 /* Grid Shop Redesign [Valorant Style] */
@@ -1102,6 +1118,18 @@ body.mobile-ui-active .checkbox-container label {
     margin-bottom: 20px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 10px;
+}
+
+body.mobile-ui-active .shop-header {
+    margin-bottom: 10px;
+}
+
+body.mobile-ui-active .shop-header h1 {
+    font-size: 1rem;
+}
+
+body.mobile-ui-active #shop-balance {
+    font-size: 0.6rem;
 }
 
 #shop-grid {
@@ -1197,37 +1225,43 @@ body.mobile-ui-active .checkbox-container label {
 
 /* Mobile Adjustments for Grid Shop */
 body.mobile-ui-active #shop-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    max-height: 60vh;
+    grid-template-columns: repeat(4, 1fr);
+    /* Back to 4 columns but tiny */
+    gap: 4px;
+    max-height: 50vh;
     overflow-y: auto;
-    padding-right: 5px;
+    padding-right: 2px;
 }
 
 body.mobile-ui-active .shop-col {
-    padding: 5px;
+    padding: 3px;
+    gap: 4px;
+    border-radius: 6px;
 }
 
 body.mobile-ui-active .shop-item.card {
-    padding: 8px;
+    padding: 4px;
+    border-radius: 4px;
 }
 
 body.mobile-ui-active .shop-item.card .item-name {
-    font-size: 0.75rem;
+    font-size: 0.55rem;
 }
 
 body.mobile-ui-active .shop-item.card .item-desc {
-    font-size: 0.6rem;
-    margin-bottom: 4px;
+    font-size: 0.45rem;
+    margin-bottom: 2px;
+    line-height: 1.1;
 }
 
 body.mobile-ui-active .shop-item.card .item-price {
-    font-size: 0.7rem;
+    font-size: 0.55rem;
 }
 
 body.mobile-ui-active .col-title {
-    font-size: 0.65rem;
-    letter-spacing: 1px;
+    font-size: 0.5rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
 }
 
 body.mobile-ui-active.in-game #mobile-controls {
