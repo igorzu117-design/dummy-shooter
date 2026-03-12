@@ -1093,9 +1093,51 @@ body.mobile-ui-active .checkbox-container label {
     font-size: 0.65rem;
 }
 
-body.mobile-ui-active .tab-btn {
-    padding: 4px 8px;
+body.mobile-ui-active #screen-shop h1 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+body.mobile-ui-active #shop-balance {
+    font-size: 0.9rem !important;
+    margin-bottom: 10px !important;
+}
+
+body.mobile-ui-active .shop-tabs {
+    gap: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+body.mobile-ui-active .shop-tabs .tab-btn {
+    padding: 4px 10px;
     font-size: 0.65rem;
+}
+
+body.mobile-ui-active .shop-item {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+}
+
+body.mobile-ui-active .item-name {
+    font-size: 0.75rem;
+}
+
+body.mobile-ui-active .item-price {
+    font-size: 0.75rem;
+}
+
+body.mobile-ui-active .shop-item span img,
+body.mobile-ui-active .item-price img {
+    width: 12px;
+    height: 12px;
+}
+
+body.mobile-ui-active #btn-close-shop {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    margin-top: 10px;
 }
 
 body.mobile-ui-active.in-game #mobile-controls {
