@@ -1386,3 +1386,12 @@ body.mobile-ui-active.in-game #mobile-controls {
     background: rgba(255, 215, 0, 0.4);
     border-color: rgba(255, 215, 0, 0.6);
 }
+#btn-mobile-pause {
+    bottom: calc(85px + env(safe-area-inset-bottom));
+    left: calc(10px + env(safe-area-inset-left));
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    background: rgba(100, 116, 139, 0.4);
+    border-color: rgba(100, 116, 139, 0.6);
+}
