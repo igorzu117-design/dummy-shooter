@@ -272,90 +272,90 @@
             <button id="btn-menu-death">В главное меню</button>
         </div>
 
-        <!-- Shop Menu -->
-        <div id="screen-shop" class="screen">
-            <h1>МАГАЗИН [B]</h1>
-            <div id="shop-balance" style="color: gold; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">
-                Баланс: 800 🪙</div>
-
-            <div class="shop-tabs">
-                <button id="btn-tab-weapons" class="tab-btn active">ОРУЖИЕ</button>
-                <button id="btn-tab-armor" class="tab-btn">БРОНЯ</button>
-                <button id="btn-tab-ammo" class="tab-btn">МАГАЗИНЫ</button>
+        <!-- Shop Menu [Valorant Grid Style] -->
+        <div id="screen-shop" class="screen wide-screen">
+            <div class="shop-header">
+                <h1>МАГАЗИН</h1>
+                <div id="shop-balance">БИТКОИНЫ: 800 🪙</div>
             </div>
 
-            <div id="shop-weapons" class="shop-list">
-                <button class="shop-item" data-type="weapon" data-id="pistol" data-price="200">
-                    <span class="item-name">Пистолет (Урон 20)</span>
-                    <span class="item-price">200 🪙</span>
-                </button>
-                <button class="shop-item" data-type="weapon" data-id="traumat" data-price="300">
-                    <span class="item-name">Травмат «Стражник» (Оглушение 2с)</span>
-                    <span class="item-price">300 🪙</span>
-                </button>
-                <button class="shop-item" data-type="weapon" data-id="auto" data-price="400">
-                    <span class="item-name">Автомат (Урон 15)</span>
-                    <span class="item-price">400 🪙</span>
-                </button>
-                <button class="shop-item" data-type="weapon" data-id="sniper" data-price="500">
-                    <span class="item-name">Снайперка (Урон 80)</span>
-                    <span class="item-price">500 🪙</span>
-                </button>
-                <button class="shop-item" data-type="scope" data-id="scope2x" data-price="0">
-                    <span class="item-name">Прицел 2x (Снайперка)</span>
-                    <span class="item-price">0 🪙</span>
-                </button>
-                <button class="shop-item" data-type="scope" data-id="scope3x" data-price="0">
-                    <span class="item-name">Прицел 3x (Снайперка)</span>
-                    <span class="item-price">0 🪙</span>
-                </button>
-                <button class="shop-item" data-type="scope" data-id="scope5x" data-price="0">
-                    <span class="item-name">Прицел 5x (Снайперка)</span>
-                    <span class="item-price">0 🪙</span>
-                </button>
-            </div>
-            <div id="shop-armor" class="shop-list" style="display: none;">
-                <button class="shop-item" data-type="armor" data-id="armor1" data-price="100">
-                    <span class="item-name">Броня Ур.1 (+10 Защиты)</span>
-                    <span class="item-price">100 🪙</span>
-                </button>
-                <button class="shop-item" data-type="armor" data-id="armor2" data-price="150">
-                    <span class="item-name">Броня Ур.2 (+15 Защиты)</span>
-                    <span class="item-price">150 🪙</span>
-                </button>
-                <button class="shop-item" data-type="armor" data-id="armor3" data-price="200">
-                    <span class="item-name">Броня Ур.3 (+20 Защиты)</span>
-                    <span class="item-price">200 🪙</span>
-                </button>
-                <button class="shop-item" data-type="armor" data-id="armor4" data-price="250">
-                    <span class="item-name">Броня Ур.4 (+30 Защиты)</span>
-                    <span class="item-price">250 🪙</span>
-                </button>
-                <button class="shop-item" data-type="armor" data-id="armor5" data-price="300">
-                    <span class="item-name">Броня Ур.5 (+50 Защиты)</span>
-                    <span class="item-price">300 🪙</span>
-                </button>
-            </div>
-            <div id="shop-ammo" class="shop-list" style="display: none;">
-                <button class="shop-item" data-type="ammo" data-id="pistol" data-price="200">
-                    <span class="item-name">Патроны (Пистолет, 50шт)</span>
-                    <span class="item-price">200 🪙</span>
-                </button>
-                <button class="shop-item" data-type="ammo" data-id="traumat" data-price="150">
-                    <span class="item-name">Патроны (Травмат, 10шт)</span>
-                    <span class="item-price">150 🪙</span>
-                </button>
-                <button class="shop-item" data-type="ammo" data-id="auto" data-price="200">
-                    <span class="item-name">Патроны (Автомат, 70шт)</span>
-                    <span class="item-price">200 🪙</span>
-                </button>
-                <button class="shop-item" data-type="ammo" data-id="sniper" data-price="300">
-                    <span class="item-name">Патроны (Снайперка, 30шт)</span>
-                    <span class="item-price">300 🪙</span>
-                </button>
+            <div id="shop-grid">
+                <!-- SIDEARMS -->
+                <div class="shop-col">
+                    <div class="col-title">SIDEARMS</div>
+                    <button class="shop-item card" data-type="weapon" data-id="pistol" data-price="200">
+                        <div class="item-name">Пистолет</div>
+                        <div class="item-desc">Damage 20</div>
+                        <div class="item-price">200 🪙</div>
+                    </button>
+                    <button class="shop-item card" data-type="weapon" data-id="traumat" data-price="300">
+                        <div class="item-name">Стражник</div>
+                        <div class="item-desc">Stun 2s</div>
+                        <div class="item-price">300 🪙</div>
+                    </button>
+                </div>
+
+                <!-- PRIMARY -->
+                <div class="shop-col">
+                    <div class="col-title">PRIMARY</div>
+                    <button class="shop-item card" data-type="weapon" data-id="auto" data-price="400">
+                        <div class="item-name">Автомат</div>
+                        <div class="item-desc">Damage 15</div>
+                        <div class="item-price">400 🪙</div>
+                    </button>
+                    <button class="shop-item card" data-type="weapon" data-id="sniper" data-price="500">
+                        <div class="item-name">AWM</div>
+                        <div class="item-desc">High Power</div>
+                        <div class="item-price">500 🪙</div>
+                    </button>
+                    <button class="shop-item card" data-type="weapon" data-id="shotgun" data-price="600">
+                        <div class="item-name">Дробовик</div>
+                        <div class="item-desc">Close Range</div>
+                        <div class="item-price">600 🪙</div>
+                    </button>
+                </div>
+
+                <!-- GEAR -->
+                <div class="shop-col">
+                    <div class="col-title">GEAR</div>
+                    <button class="shop-item card" data-type="armor" data-id="armor3" data-price="200">
+                        <div class="item-name">Броня Ур.3</div>
+                        <div class="item-price">200 🪙</div>
+                    </button>
+                    <button class="shop-item card" data-type="armor" data-id="armor5" data-price="300">
+                        <div class="item-name">Броня Ур.5</div>
+                        <div class="item-price">300 🪙</div>
+                    </button>
+                    <div class="col-divider"></div>
+                    <button class="shop-item card compact" data-type="scope" data-id="scope2x" data-price="0">
+                        <div class="item-name">Scope 2x</div>
+                        <div class="item-price">0 🪙</div>
+                    </button>
+                    <button class="shop-item card compact" data-type="scope" data-id="scope5x" data-price="0">
+                        <div class="item-name">Scope 5x</div>
+                        <div class="item-price">0 🪙</div>
+                    </button>
+                </div>
+
+                <!-- AMMO -->
+                <div class="shop-col">
+                    <div class="col-title">AMMO</div>
+                    <button class="shop-item card ammo" data-type="ammo" data-id="pistol" data-price="200">
+                        <div class="item-name">Pistol Pack</div>
+                        <div class="item-price">200 🪙</div>
+                    </button>
+                    <button class="shop-item card ammo" data-type="ammo" data-id="auto" data-price="200">
+                        <div class="item-name">Auto Mag</div>
+                        <div class="item-price">200 🪙</div>
+                    </button>
+                    <button class="shop-item card ammo" data-type="ammo" data-id="sniper" data-price="300">
+                        <div class="item-name">AWM Mag</div>
+                        <div class="item-price">300 🪙</div>
+                    </button>
+                </div>
             </div>
 
-            <button id="btn-close-shop" style="margin-top: 20px;">Закрыть</button>
+            <button id="btn-close-shop" class="shop-close-btn">ЗАКРЫТЬ [ESC]</button>
         </div>
 
     </div>

@@ -618,40 +618,6 @@ function setupShop() {
         controls.lock();
     });
 
-    const tabWeapons = document.getElementById('btn-tab-weapons');
-    const tabArmor = document.getElementById('btn-tab-armor');
-    const tabAmmo = document.getElementById('btn-tab-ammo');
-    const listWeapons = document.getElementById('shop-weapons');
-    const listArmor = document.getElementById('shop-armor');
-    const listAmmo = document.getElementById('shop-ammo');
-
-    tabWeapons.addEventListener('click', () => {
-        tabWeapons.classList.add('active');
-        tabArmor.classList.remove('active');
-        tabAmmo.classList.remove('active');
-        listWeapons.style.display = 'block';
-        listArmor.style.display = 'none';
-        listAmmo.style.display = 'none';
-    });
-
-    tabArmor.addEventListener('click', () => {
-        tabArmor.classList.add('active');
-        tabWeapons.classList.remove('active');
-        tabAmmo.classList.remove('active');
-        listArmor.style.display = 'block';
-        listWeapons.style.display = 'none';
-        listAmmo.style.display = 'none';
-    });
-
-    tabAmmo.addEventListener('click', () => {
-        tabAmmo.classList.add('active');
-        tabWeapons.classList.remove('active');
-        tabArmor.classList.remove('active');
-        listAmmo.style.display = 'block';
-        listWeapons.style.display = 'none';
-        listArmor.style.display = 'none';
-    });
-
     document.querySelectorAll('.shop-item').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const el = e.currentTarget;

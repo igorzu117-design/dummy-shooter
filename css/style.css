@@ -1093,51 +1093,141 @@ body.mobile-ui-active .checkbox-container label {
     font-size: 0.65rem;
 }
 
-body.mobile-ui-active #screen-shop h1 {
-    font-size: 1.2rem;
+/* Grid Shop Redesign [Valorant Style] */
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+#shop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.shop-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.col-title {
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-align: left;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    opacity: 0.8;
+}
+
+.col-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+}
+
+.shop-item.card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.shop-item.card:hover {
+    background: rgba(255, 140, 0, 0.15);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.shop-item.card .item-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.shop-item.card .item-desc {
+    font-size: 0.7rem;
+    color: #94a3b8;
     margin-bottom: 8px;
 }
 
-body.mobile-ui-active #shop-balance {
-    font-size: 0.9rem !important;
-    margin-bottom: 10px !important;
+.shop-item.card .item-price {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #eab308;
+    align-self: flex-end;
 }
 
-body.mobile-ui-active .shop-tabs {
-    gap: 5px;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-}
-
-body.mobile-ui-active .shop-tabs .tab-btn {
-    padding: 4px 10px;
-    font-size: 0.65rem;
-}
-
-body.mobile-ui-active .shop-item {
+.shop-item.card.compact {
     padding: 8px 12px;
-    margin-bottom: 6px;
-    border-radius: 8px;
 }
 
-body.mobile-ui-active .item-name {
+.shop-item.card.ammo {
+    border-left: 3px solid #eab308;
+}
+
+.shop-close-btn {
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 40px;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+/* Mobile Adjustments for Grid Shop */
+body.mobile-ui-active #shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+body.mobile-ui-active .shop-col {
+    padding: 5px;
+}
+
+body.mobile-ui-active .shop-item.card {
+    padding: 8px;
+}
+
+body.mobile-ui-active .shop-item.card .item-name {
     font-size: 0.75rem;
 }
 
-body.mobile-ui-active .item-price {
-    font-size: 0.75rem;
+body.mobile-ui-active .shop-item.card .item-desc {
+    font-size: 0.6rem;
+    margin-bottom: 4px;
 }
 
-body.mobile-ui-active .shop-item span img,
-body.mobile-ui-active .item-price img {
-    width: 12px;
-    height: 12px;
+body.mobile-ui-active .shop-item.card .item-price {
+    font-size: 0.7rem;
 }
 
-body.mobile-ui-active #btn-close-shop {
-    padding: 8px 15px;
-    font-size: 0.8rem;
-    margin-top: 10px;
+body.mobile-ui-active .col-title {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
 }
 
 body.mobile-ui-active.in-game #mobile-controls {
