@@ -547,6 +547,11 @@ function init() {
     setupShop();
     updateInventoryUI();
 
+    // Mobile Pause
+    document.getElementById('btn-mobile-pause').addEventListener('click', () => {
+        showScreen('pause');
+    });
+
     // Инициализируем элементы UI после загрузки DOM
     invertWheelCheckbox = document.getElementById('invert-wheel-checkbox');
     quietStepCheckbox = document.getElementById('quiet-step-checkbox');
