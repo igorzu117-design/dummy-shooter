@@ -895,8 +895,6 @@ function createShotgunModel() {
 
     return group;
 }
-return group;
-}
 
 function createSniperModel() {
     const group = new THREE.Group();
