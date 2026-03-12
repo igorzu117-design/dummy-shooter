@@ -1090,8 +1090,8 @@ body.mobile-ui-active .screen.wide-screen {
     width: 85%;
     max-width: 360px;
     /* Further shrunk shop/settings from 400px */
-    transform: translateY(15px);
-    /* Move down to clear top HUD */
+    transform: translateY(20px);
+    /* Move down slightly more to clear top HUD */
 }
 
 body.mobile-ui-active h2 {
