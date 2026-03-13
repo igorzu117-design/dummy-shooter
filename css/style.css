@@ -1125,9 +1125,13 @@ body.mobile-ui-active .settings-content h3 {
 }
 
 body.mobile-ui-active p.help-text {
-    font-size: 0.55rem;
+    font-size: 0.45rem;
     padding: 8px;
     line-height: 1.3;
+}
+
+body.mobile-ui-active p.help-text b {
+    font-weight: 600;
 }
 
 body.mobile-ui-active .slider-container {
