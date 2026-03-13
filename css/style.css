@@ -1107,6 +1107,7 @@ body.mobile-ui-active .settings-content {
 }
 
 body.mobile-ui-active .slider-container {
+    margin-top: 4px;
     margin-bottom: 5px;
 }
 
@@ -1115,11 +1116,21 @@ body.mobile-ui-active .slider-container label {
 }
 
 body.mobile-ui-active .checkbox-container {
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 body.mobile-ui-active .checkbox-container label {
     font-size: 0.5rem;
+}
+
+body.mobile-ui-active .settings-tabs {
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+}
+
+body.mobile-ui-active .settings-content h3 {
+    margin-top: 5px !important;
+    font-size: 0.75rem;
 }
 
 body.mobile-ui-active .tab-btn {
