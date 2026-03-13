@@ -1083,7 +1083,7 @@ body.mobile-ui-active .screen {
     width: 65%;
     max-width: 180px;
     /* Further shrunk settings/menu screens from 200px */
-    padding: 10px;
+    padding: 5px 10px 10px 10px;
     margin: auto;
     gap: 5px;
     border-radius: 12px;
@@ -1093,8 +1093,8 @@ body.mobile-ui-active .screen.wide-screen {
     width: 80%;
     max-width: 320px;
     /* Further shrunk shop/settings from 360px */
-    transform: translateY(-10px);
-    /* Move UP instead of DOWN to clear middle screen */
+    transform: translateY(-25px);
+    /* Push UP significantly more */
 }
 
 body.mobile-ui-active h2 {
@@ -1106,17 +1106,8 @@ body.mobile-ui-active .settings-content {
     min-height: 120px;
 }
 
-body.mobile-ui-active .slider-container {
-    margin-top: 4px;
-    margin-bottom: 5px;
-}
-
-body.mobile-ui-active .slider-container label {
-    font-size: 0.45rem;
-}
-
 body.mobile-ui-active .checkbox-container {
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 body.mobile-ui-active .checkbox-container label {
@@ -1124,13 +1115,18 @@ body.mobile-ui-active .checkbox-container label {
 }
 
 body.mobile-ui-active .settings-tabs {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     padding-bottom: 5px;
 }
 
 body.mobile-ui-active .settings-content h3 {
-    margin-top: 5px !important;
+    margin-top: 2px !important;
     font-size: 0.75rem;
+}
+
+body.mobile-ui-active .slider-container {
+    margin-top: 2px;
+    margin-bottom: 5px;
 }
 
 body.mobile-ui-active .tab-btn {
