@@ -1093,8 +1093,8 @@ body.mobile-ui-active .screen.wide-screen {
     width: 80%;
     max-width: 320px;
     /* Further shrunk shop/settings from 360px */
-    transform: translateY(20px);
-    /* Move down slightly more to clear top HUD */
+    transform: translateY(-10px);
+    /* Move UP instead of DOWN to clear middle screen */
 }
 
 body.mobile-ui-active h2 {
@@ -1112,6 +1112,10 @@ body.mobile-ui-active .slider-container {
 
 body.mobile-ui-active .slider-container label {
     font-size: 0.45rem;
+}
+
+body.mobile-ui-active .checkbox-container {
+    margin-top: 5px;
 }
 
 body.mobile-ui-active .checkbox-container label {
@@ -1252,7 +1256,7 @@ body.mobile-ui-active #shop-grid {
     grid-template-columns: repeat(4, 1fr);
     /* Back to 4 columns but tiny */
     gap: 4px;
-    max-height: 50vh;
+    max-height: 45vh;
     overflow-y: auto;
     padding-right: 2px;
 }
@@ -1264,7 +1268,7 @@ body.mobile-ui-active .shop-col {
 }
 
 body.mobile-ui-active .shop-item.card {
-    padding: 4px;
+    padding: 2px 4px;
     border-radius: 4px;
 }
 
