@@ -288,7 +288,7 @@ async function registerLocalServerOnMaster() {
     const hasPassword = document.getElementById('server-pass-enable').checked;
 
     try {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch(`${MASTER_SERVER_URL}/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -416,9 +416,9 @@ function toggleHud(hidden) {
     }
 }
 
-// --- NETWORK LOGIC (SERVER BROWSER & WEBSOCKETS) ---
-
-const MASTER_SERVER_URL = 'http://localhost:3000';
+// --- NETWORK CONFIG ---
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const MASTER_SERVER_URL = IS_LOCAL ? 'http://localhost:3000' : 'https://ВАШ-АДРЕС-МАСТЕР-СЕРВЕРА.onrender.com';
 let gameSocket = null;
 let myNetworkId = null;
 let networkPlayers = {}; // Хранилище для моделей других игроков

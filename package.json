@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "node server/master.js",
+    "start:master": "node server/master.js",
+    "start:game": "node server/game.js"
+  },
   "dependencies": {
     "axios": "^1.15.2",
     "cors": "^2.8.6",

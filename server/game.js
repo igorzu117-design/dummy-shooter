@@ -1,8 +1,8 @@
 const WebSocket = require('ws');
 const axios = require('axios');
 
-const GAME_PORT = 8080;
-const MASTER_URL = 'http://localhost:3000';
+const GAME_PORT = process.env.PORT || 8080;
+const MASTER_URL = process.env.MASTER_URL || 'http://localhost:3000';
 const wss = new WebSocket.Server({ port: GAME_PORT });
 
 let players = {};

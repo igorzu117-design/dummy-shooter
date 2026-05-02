@@ -73,7 +73,7 @@ setInterval(() => {
     }
 }, 5000);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Master Server запущен на http://localhost:${PORT}`);
+    console.log(`Master Server запущен на порту ${PORT}`);
 });
