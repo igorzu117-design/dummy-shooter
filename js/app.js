@@ -186,7 +186,10 @@ document.querySelectorAll('.btn-back').forEach(btn => {
 });
 
 // --- MULTIPLAYER UI LOGIC ---
-document.getElementById('btn-play-multi').addEventListener('click', () => showScreen('multi-servers'));
+document.getElementById('btn-play-multi').addEventListener('click', () => {
+    showScreen('multi-servers');
+    refreshServerList(); // Обновляем список при входе
+});
 document.getElementById('btn-create-server-init').addEventListener('click', () => {
     showScreen('create-server');
     resetCreateSteps();
@@ -267,8 +270,40 @@ btnFinish.addEventListener('click', () => {
     seconds = Math.max(5, Math.min(300, seconds)); // Limit 5s to 300s
 
     showScreen('waiting-players');
+    document.getElementById('wait-player-count').innerText = `Игроков: 1 / ${playersSlider.value}`;
+    
+    // NETWORK: Регистрация сервера на Master Server (эмуляция хостинга)
+    registerLocalServerOnMaster();
+    
     startWaitTimer(seconds);
 });
+
+/**
+ * Эмуляция регистрации сервера, если игрок решил стать хостом.
+ * В реальном приложении здесь бы запускался локальный WebSocket-сервер.
+ */
+async function registerLocalServerOnMaster() {
+    const serverName = `Room ${Math.floor(Math.random() * 1000)}`;
+    const maxPlayers = parseInt(playersSlider.value);
+    const hasPassword = document.getElementById('server-pass-enable').checked;
+
+    try {
+        const response = await fetch('http://localhost:3000/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: serverName,
+                address: 'ws://localhost:8080', // По умолчанию стучимся на стандартный порт
+                maxPlayers: maxPlayers,
+                hasPassword: hasPassword
+            })
+        });
+        const data = await response.json();
+        console.log("[NETWORK] Сервер зарегистрирован с ID:", data.id);
+    } catch (e) {
+        console.error("[NETWORK] Ошибка регистрации на Master Server:", e);
+    }
+}
 
 function startWaitTimer(duration) {
     let timeLeft = duration;
@@ -378,6 +413,130 @@ function toggleHud(hidden) {
     // Применяем видимость только если мы не в меню (там HUD всегда hidden)
     if (!currentScreen) {
         hud.style.display = isHudHidden ? 'none' : 'block';
+    }
+}
+
+// --- NETWORK LOGIC (SERVER BROWSER & WEBSOCKETS) ---
+
+const MASTER_SERVER_URL = 'http://localhost:3000';
+let gameSocket = null;
+let myNetworkId = null;
+let networkPlayers = {}; // Хранилище для моделей других игроков
+
+/**
+ * Получение списка серверов с Master Server
+ */
+async function refreshServerList() {
+    const tbody = document.getElementById('server-table-body');
+    tbody.innerHTML = '<tr><td colspan="4">Загрузка...</td></tr>';
+
+    try {
+        const response = await fetch(`${MASTER_SERVER_URL}/servers`);
+        const servers = await response.json();
+        
+        tbody.innerHTML = '';
+        if (servers.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4">Серверов не найдено...</td></tr>';
+            return;
+        }
+
+        servers.forEach(srv => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${srv.name}</td>
+                <td>${srv.players}/${srv.maxPlayers}</td>
+                <td class="ping-cell">...</td>
+                <td>${srv.hasPassword ? '🔒' : '🔓'}</td>
+            `;
+            
+            // Клик для подключения
+            tr.style.cursor = 'pointer';
+            tr.addEventListener('click', () => connectToGameServer(srv.address));
+            
+            tbody.appendChild(tr);
+            measurePing(srv.address, tr.querySelector('.ping-cell'));
+        });
+    } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="4" style="color: #ef4444;">Ошибка связи с Master Server</td></tr>';
+        console.error("Master Server Error:", e);
+    }
+}
+
+/**
+ * Подключение к конкретному игровому серверу
+ */
+function connectToGameServer(address) {
+    console.log("[NETWORK] Подключение к:", address);
+    
+    if (gameSocket) gameSocket.close();
+    
+    gameSocket = new WebSocket(address);
+
+    gameSocket.onopen = () => {
+        console.log("[NETWORK] Соединение установлено!");
+        showScreen(null); // Закрываем меню, входим в игру
+        startGame('multiplayer');
+    };
+
+    gameSocket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        
+        if (data.type === 'init') {
+            myNetworkId = data.id;
+            console.log("[NETWORK] Мой ID:", myNetworkId);
+        }
+        
+        if (data.type === 'update') {
+            syncPlayers(data.players);
+        }
+    };
+
+    gameSocket.onclose = () => {
+        console.log("[NETWORK] Соединение разорвано");
+        if (currentScreen === null) showScreen('main');
+    };
+}
+
+/**
+ * Расчет пинга (открытие и закрытие тестового соединения)
+ */
+function measurePing(address, cellElement) {
+    const start = Date.now();
+    try {
+        const testWs = new WebSocket(address);
+        testWs.onopen = () => {
+            const ping = Date.now() - start;
+            cellElement.innerText = `${ping}ms`;
+            testWs.close();
+        };
+        testWs.onerror = () => {
+            cellElement.innerText = "Timeout";
+        };
+    } catch (e) {
+        cellElement.innerText = "Error";
+    }
+}
+
+/**
+ * Синхронизация данных о других игроках
+ */
+function syncPlayers(serverPlayers) {
+    // В этой функции мы бы обновляли 3D модели других игроков на сцене.
+    // Пока просто выводим лог для отладки
+    networkPlayers = serverPlayers;
+}
+
+/**
+ * Отправка данных о позиции игрока (вызывается в animate)
+ */
+function broadcastMyPosition() {
+    if (gameSocket && gameSocket.readyState === WebSocket.OPEN) {
+        gameSocket.send(JSON.stringify({
+            type: 'move',
+            x: camera.position.x,
+            y: camera.position.y,
+            z: camera.position.z
+        }));
     }
 }
 
@@ -2627,6 +2786,9 @@ function animate() {
                 'YXZ'
             );
         }
+
+        // --- NETWORK: Отправка позиции ---
+        broadcastMyPosition();
 
         renderer.render(scene, camera);
     } catch (err) {
